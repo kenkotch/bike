@@ -10,7 +10,7 @@ let fetchThis = 'https://roads.googleapis.com/v1/snapToRoads?path='
 
 import Header from './components/Header'
 // import StartButton from './components/StartButton'
-import StopButton from './components/StopButton'
+// import StopButton from './components/StopButton'
 // import Magic from './components/Magic'
 
 export default class App extends Component {
@@ -175,6 +175,7 @@ let deg2rad = (deg) => deg * (Math.PI / 180)
         >
         Google
       </Icon.Button>
+        <Text>{this.state.user}</Text>
       {/* <Magic /> */}
       <Text>{this.state.holder}</Text>
       <Text>{this.state.distanceAppender}</Text>
