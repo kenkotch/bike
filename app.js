@@ -4,6 +4,9 @@ import { Router, Scene, navBar } from 'react-native-router-flux';
 import { Container, Button, Text } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
+import Brakes from './components/Brakes'
+import Chains from './components/Chains'
+import Tires from './components/Tires'
 styles = require('./assets/stylesheet/Styles')
 
 import Login from './components/Login'
@@ -71,7 +74,51 @@ export default class App extends Component {
       Linking.openURL(url);
     }
   };
-
+  updateTires=()=>{
+    console.log('tires')
+  fetch('https://my-bike.herokuapp.com/components/tires', {
+       headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json'
+       },
+       method: 'PATCH',
+       body: JSON.stringify( {email: this.state.user})
+     }).then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson)
+      this.setState({tires: responseJson})
+    })
+  }
+  updateChains=()=>{
+    console.log('chain')
+    fetch('https://my-bike.herokuapp.com/components/chain', {
+         headers: {
+           'Accept': 'application/json',
+           'Content-Type': 'application/json'
+         },
+         method: 'PATCH',
+         body: JSON.stringify( {email: this.state.user})
+       }).then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson)
+        this.setState({chain: responseJson})
+      })
+  }
+  updateBrakes=()=>{
+    console.log('brakes')
+    fetch('https://my-bike.herokuapp.com/components/brakes', {
+         headers: {
+           'Accept': 'application/json',
+           'Content-Type': 'application/json'
+         },
+         method: 'PATCH',
+         body: JSON.stringify( {email: this.state.user})
+       }).then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson)
+        this.setState({brake_pads: responseJson})
+      })
+  }
   render() {
     const { user } = this.state;
       // fetch('https://my-bike.herokuapp.com/components', {
@@ -96,20 +143,17 @@ export default class App extends Component {
       .then((responseJson) => {
         this.setState({name: responseJson[0]['name'], total_mileage: responseJson[0]['total_mileage'], tires: responseJson[1]['tires'], chain: responseJson[1]['chain'], brake_pads: responseJson[1]['brake_pads']})
       })
-
-
     return (
       <View>
         { user
           ? // Show user info if already logged in
             <View style={ styles.background }>
               <Header />
-              <Text>Awesome Blossom { this.state.user }</Text>
-              <Text>name { this.state.name }</Text>
-              <Text>mileage { this.state.total_mileage }</Text>
-              <Text>tires { this.state.tires }</Text>
-              <Text>chain { this.state.chain }</Text>
-              <Text>brakes { this.state.brake_pads }</Text>
+              <Maintenance
+                updateBrakes={this.updateBrakes} brake_pads={this.state.brake_pads}
+                updateChains={this.updateChains} chain={this.state.chain}
+                updateTires={this.updateTires} tires={this.state.tires}
+              />
             </View>
           : // Show log in message if not
 
