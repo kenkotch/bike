@@ -12,10 +12,14 @@ import Maintenance from './components/Maintenance'
 import Bikes from './components/Bikes'
 
 export default class App extends Component {
+  constructor(props){
+    super(props)
+    this.state={user:undefined, name: '', total_mileage: '', tires: '', chain: '', brake_pads: ''}
+  }
 
-  state = {
-    user: undefined, // user has not logged in yet
-  };
+  // state = {
+  //   user: undefined, // user has not logged in yet
+  // };
 
   // Set up Linking
   componentDidMount() {
@@ -70,17 +74,29 @@ export default class App extends Component {
 
   render() {
     const { user } = this.state;
-    fetch('https://my-bike.herokuapp.com/bikes', {
-         headers: {
-           'Accept': 'application/json',
-           'Content-Type': 'application/json'
-         },
-         method: 'POST',
-         body: JSON.stringify( {email: this.state.user})
-       }).then((response) => response.json())
+      // fetch('https://my-bike.herokuapp.com/components', {
+      //      headers: {
+      //        'Accept': 'application/json',
+      //        'Content-Type': 'application/json'
+      //      },
+      //      method: 'PATCH',
+      //      body: JSON.stringify( {email: this.state.user, mileage: 20})
+      //    }).then((response) => response.json())
+      //   .then((responseJson) => {
+      //     console.log(responseJson)
+      //   })
+      fetch('https://my-bike.herokuapp.com/bikes', {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
+        body: JSON.stringify( {email: this.state.user})
+      }).then((response) => response.json())
       .then((responseJson) => {
-        console.log(responseJson)
+        this.setState({name: responseJson[0]['name'], total_mileage: responseJson[0]['total_mileage'], tires: responseJson[1]['tires'], chain: responseJson[1]['chain'], brake_pads: responseJson[1]['brake_pads']})
       })
+
 
     return (
       <View>
@@ -88,9 +104,15 @@ export default class App extends Component {
           ? // Show user info if already logged in
             <View style={ styles.background }>
               <Header />
-              <Text>Welcome { this.state.user }</Text>
+              <Text>Awesome Blossom { this.state.user }</Text>
+              <Text>name { this.state.name }</Text>
+              <Text>mileage { this.state.total_mileage }</Text>
+              <Text>tires { this.state.tires }</Text>
+              <Text>chain { this.state.chain }</Text>
+              <Text>brakes { this.state.brake_pads }</Text>
             </View>
           : // Show log in message if not
+
             <View>
               <Login
                 loginWithGoogle={ this.loginWithGoogle.bind(this) }
