@@ -1,10 +1,11 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
+
 var Header = () => {
   return (
     <View>
-      <View style={{flexDirection: 'row'}}>
+      <View style={ styles.container }>
         <Text style={ styles.muliLight }>      my</Text>
         <Text style={ styles.logo }>&#xf206;</Text>
         <Text style={ styles.muliLight }>bike     </Text>

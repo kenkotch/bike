@@ -5,14 +5,14 @@ var { StyleSheet } = React;
 module.exports = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#e2ca29',
     alignItems: 'center',
+    flexDirection: 'row'
   },
   logo: {
-    backgroundColor: 'transparent',
     fontFamily: 'FontAwesome',
     fontSize: 60,
-    marginTop: 20,
+    marginTop: 95,
     marginBottom: 1,
     alignItems: 'center',
     flex: 1
@@ -25,7 +25,7 @@ module.exports = StyleSheet.create({
   muliLight: {
     fontFamily: 'Muli-Light',
     fontSize: 45,
-    marginTop: 20,
+    marginTop: 95,
     marginBottom: 1,
   },
   background: {
@@ -47,6 +47,7 @@ module.exports = StyleSheet.create({
     fontSize: 20
   },
   hozRule: {
+    marginTop: 80,
     borderBottomColor: 'black',
     borderBottomWidth: 1,
     marginBottom: 5

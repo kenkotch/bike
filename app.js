@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Image, Linking, StyleSheet, Platform, View } from 'react-native';
-import { Router, Scene, navBar } from 'react-native-router-flux';
+import { Router, Scene, Stack, navBar } from 'react-native-router-flux';
 import { Container, Button, Text } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
@@ -8,8 +8,10 @@ styles = require('./assets/stylesheet/Styles')
 
 import Login from './components/Login'
 import Header from './components/Header'
-import Maintenance from './components/Maintenance'
-import Bikes from './components/Bikes'
+// import Maintenance from './components/Maintenance'
+// import Bikes from './components/Bikes'
+import Test from './components/Test'
+import Test2 from './components/Test2'
 
 export default class App extends Component {
 
@@ -74,10 +76,38 @@ export default class App extends Component {
       <View>
         { user
           ? // Show user info if already logged in
-            <View style={ styles.background }>
-              <Header />
-              <Text>Welcome { this.state.user }</Text>
-            </View>
+
+        <View>
+          <Router>
+
+            <Scene key="root">
+
+              <Scene
+                hideNavBar
+                key="header"
+                component={ Header }
+                title="Header"
+                />
+
+              <Scene
+                hideNavBar
+                key="test"
+                component={ Test }
+                title="test"
+                />
+
+            <Scene
+                hideNavBar
+                key="test2"
+                component={ Test2 }
+                title="test2"
+                initial
+                />
+
+            </Scene>
+
+          </Router>
+        </View>
           : // Show log in message if not
             <View>
               <Login
