@@ -99,6 +99,7 @@ getLocation = () => {
   };
 
   render() {
+    const { user } = this.state;
 
       let fetching;
 
@@ -118,7 +119,7 @@ getLocation = () => {
           return fetch(`${fetching}`).then((response) => response.json()).then((responseJson) => {
             this.setState({responser: responseJson})
             let lat1 = this.state.responser.snappedPoints[0].location.latitude
-            let lon1 = this.state.responser.snappedPoints[0].location.longitude
+            let lon1 = -122.233// this.state.responser.snappedPoints[0].location.longitude
             let lat2 = this.state.responser.snappedPoints[this.state.responser.snappedPoints.length - 1].location.latitude
             let lon2 = this.state.responser.snappedPoints[this.state.responser.snappedPoints.length - 1].location.longitude
             getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2)
@@ -163,28 +164,27 @@ let deg2rad = (deg) => deg * (Math.PI / 180)
       }
 
       let theMagicHappen = () => {
-      fetch('https://my-bike.herokuapp.com/components', {
-               headers: {
-                 'Accept': 'application/json',
-                 'Content-Type': 'application/json'
-               },
-               method: 'PATCH',
-               body: JSON.stringify( {email: this.state.user, mileage: `${this.state.distanceAppender}`})
-             }).then((response) => response.json())
-            .then((responseJson) => {
-              console.log(responseJson)
-              this.setState({
-                appResponse: responseJson
-              })
-            })
+        fetch('https://my-bike.herokuapp.com/components', {
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            method: 'PATCH',
+            body: JSON.stringify( {email: 'sean.lemberg@gmail.com', mileage: 20})
+          }).then((response) => response.json())
+         .then((responseJson) => {
+           this.state({
+             appResponse: responseJson
+           })
+           console.log(responseJson)
+         })
           }
 
 
 
-    // console.log("STATE: DISTANCE APPENDER: -----> ", this.state.distanceAppender);
-    // console.log("finalState", this.state.appResponse);
+    console.log("STATE: DISTANCE APPENDER: -----> ", this.state.distanceAppender);
+    console.log("app response", this.state.appResponse);
 
-    const { user } = this.state;
     return (
     <View>
       <Header />
@@ -198,7 +198,6 @@ let deg2rad = (deg) => deg * (Math.PI / 180)
         <Text>{this.state.user}</Text>
       <Text>{this.state.holder}</Text>
       <Text>{this.state.distanceAppender}</Text>
-      <Text>{this.state.appResponse}</Text>
       <Button block full dark
         onPress={timeInitiate}
         style={styles.startButtonStyle}
