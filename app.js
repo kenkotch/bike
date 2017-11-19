@@ -23,6 +23,7 @@ export default class App extends Component {
       waiter: [],
       responser: [],
       distanceAppender: [],
+      appResponse: [],
       fetchThis: 'https://roads.googleapis.com/v1/snapToRoads?path='
     };
     this.getLocation = this.getLocation.bind(this);
@@ -154,15 +155,34 @@ let deg2rad = (deg) => deg * (Math.PI / 180)
       let stoppingWaterfall = () => {
         setTimeout(this.getLocation, 100)
         parentRender();
+        theMagicHappen();
       }
 
       let timeInitiate = () => {
         setTimeout(this.getLocation, 100)
-    }
+      }
+
+      let theMagicHappen = () => {
+      fetch('https://my-bike.herokuapp.com/components', {
+               headers: {
+                 'Accept': 'application/json',
+                 'Content-Type': 'application/json'
+               },
+               method: 'PATCH',
+               body: JSON.stringify( {email: this.state.user, mileage: `${this.state.distanceAppender}`})
+             }).then((response) => response.json())
+            .then((responseJson) => {
+              console.log(responseJson)
+              this.setState({
+                appResponse: responseJson
+              })
+            })
+          }
 
 
 
     // console.log("STATE: DISTANCE APPENDER: -----> ", this.state.distanceAppender);
+    // console.log("finalState", this.state.appResponse);
 
     const { user } = this.state;
     return (
@@ -176,9 +196,9 @@ let deg2rad = (deg) => deg * (Math.PI / 180)
         Google
       </Icon.Button>
         <Text>{this.state.user}</Text>
-      {/* <Magic /> */}
       <Text>{this.state.holder}</Text>
       <Text>{this.state.distanceAppender}</Text>
+      <Text>{this.state.appResponse}</Text>
       <Button block full dark
         onPress={timeInitiate}
         style={styles.startButtonStyle}
