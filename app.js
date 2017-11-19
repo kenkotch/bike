@@ -70,6 +70,18 @@ export default class App extends Component {
 
   render() {
     const { user } = this.state;
+    fetch('https://my-bike.herokuapp.com/bikes', {
+         headers: {
+           'Accept': 'application/json',
+           'Content-Type': 'application/json'
+         },
+         method: 'POST',
+         body: JSON.stringify( {email: this.state.user})
+       }).then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson)
+      })
+
     return (
       <View>
         { user
