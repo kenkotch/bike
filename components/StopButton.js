@@ -2,11 +2,13 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Container, Button, Text } from 'native-base';
 
+
 var StopButton = () => {
+  let counter = 0
+  counter++
   return (
     <View>
     <Button block
-      onPress={console.log("TEST")}
       style = {{backgroundColor: 'red'}}
     >
       <Text>S T O P</Text>

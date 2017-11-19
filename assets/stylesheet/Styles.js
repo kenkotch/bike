@@ -55,6 +55,18 @@ module.exports = StyleSheet.create({
     alignItems: 'center',
     fontFamily: 'Muli-Light',
     fontSize: 35
+  },
+  startButtonStyle: {
+    backgroundColor: 'rgba(48, 232, 67, 0.7)',
+    marginTop: 20,
+  },
+  stopButtonStyle: {
+    backgroundColor: 'rgba(209, 66, 56, 0.7)',
+    marginTop: 20,
+  },
+  finalizeButtonStyle: {
+    backgroundColor: 'rgba(20, 66, 56, 0.7)',
+    marginTop: 20,
   }
 
 });
