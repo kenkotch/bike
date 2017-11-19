@@ -63,10 +63,6 @@ module.exports = StyleSheet.create({
   stopButtonStyle: {
     backgroundColor: 'rgba(209, 66, 56, 0.7)',
     marginTop: 20,
-  },
-  finalizeButtonStyle: {
-    backgroundColor: 'rgba(20, 66, 56, 0.7)',
-    marginTop: 20,
   }
 
 });

@@ -151,6 +151,11 @@ let deg2rad = (deg) => deg * (Math.PI / 180)
 
       // setTimeout(this.getLocation, 5000)
 
+      let stoppingWaterfall = () => {
+        setTimeout(this.getLocation, 100)
+        parentRender();
+      }
+
       let timeInitiate = () => {
         setTimeout(this.getLocation, 100)
     }
@@ -180,16 +185,10 @@ let deg2rad = (deg) => deg * (Math.PI / 180)
         <Text style={{fontFamily: 'Muli-Light'}}>S T A R T</Text>
       </Button>
       <Button block full dark
-        onPress={timeInitiate}
+        onPress={stoppingWaterfall}
         style={styles.stopButtonStyle}
       >
         <Text style={{fontFamily: 'Muli-Light'}}>S T O P</Text>
-      </Button>
-      <Button block full dark
-        onPress={parentRender}
-        style={styles.finalizeButtonStyle}
-      >
-        <Text style={{fontFamily: 'Muli-Light'}}>FINALIZE DISTANCE</Text>
       </Button>
     </View>
 
