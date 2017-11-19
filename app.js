@@ -75,7 +75,6 @@ export default class App extends Component {
 
     <View>
       <Header />
-      <StartButton />
       <Icon.Button
         name="google"
         backgroundColor="#DD4B39"
@@ -83,7 +82,6 @@ export default class App extends Component {
         >
         Google
       </Icon.Button>
-      <StopButton />
       <Magic />
     </View>
 

@@ -7,7 +7,7 @@ var StopButton = () => {
     <View>
     <Button block
       onPress={console.log("TEST")}
-      style = {{backgroundColor: 'green'}}
+      style = {{backgroundColor: 'red'}}
     >
       <Text>S T O P</Text>
     </Button>
