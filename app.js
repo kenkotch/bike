@@ -74,7 +74,7 @@ export default class App extends Component {
       <View>
         { user
           ? // Show user info if already logged in
-            <View style={styles.containter}>
+            <View style={ styles.background }>
               <Header />
               <Text>Welcome { this.state.user }</Text>
             </View>
