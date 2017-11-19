@@ -6,7 +6,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
 styles = require('./assets/stylesheet/Styles')
 
+import Login from './components/Login'
 import Header from './components/Header'
+import Maintenance from './components/Maintenance'
+import Bikes from './components/Bikes'
 
 export default class App extends Component {
 
@@ -67,69 +70,25 @@ export default class App extends Component {
   render() {
     const { user } = this.state;
     return (
-    //   <View style={styles.container}>
-    //     { user
-    //       ? // Show user info if already logged in
-    //         <View style={styles.content}>
-    //           <Text style={styles.header}>
-    //             Welcome {user.name}!
-    //           </Text>
-    //           <View style={styles.avatar}>
-    //             <Image source={{ uri: user.avatar }} style={styles.avatarImage} />
-    //           </View>
-    //         </View>
-    //       : // Show Please log in message if not
-    //         <View style={styles.content}>
-    //           <Text style={styles.header}>
-    //             Welcome Stranger!
-    //           </Text>
-    //           <View style={styles.avatar}>
-    //             <Icon name="user-circle" size={100} color="rgba(0,0,0,.09)" />
-    //           </View>
-    //           <Text style={styles.text}>
-    //             Please log in to continue {'\n'}
-    //             to the awesomness
-    //           </Text>
-    //         </View>
-    //     }
-    //     {/* Login buttons */}
-    //     <View style={styles.buttons}>
-    //       <Icon.Button
-    //         name="facebook"
-    //         backgroundColor="#3b5998"
-    //         onPress={this.loginWithFacebook}
-    //         {...iconStyles}
-    //       >
-    //         Login with Facebook
-    //       </Icon.Button>
-    //       <Icon.Button
-    //         name="google"
-    //         backgroundColor="#DD4B39"
-    //         onPress={this.loginWithGoogle}
-    //         {...iconStyles}
-    //       >
-    //         Or with Google
-    //       </Icon.Button>
-    //     </View>
-    //   </View>
-    // );
+      <View>
+        { user
+          ? // Show user info if already logged in
+            <View style={styles.containter}>
+              <Header />
+            </View>
+          : // Show Please log in message if not
+            <View>
+              <Login
+                loginWithGoogle={ this.loginWithGoogle.bind(this) }
+              />
+            </View>
+        }
+      </View>
+    );
 
-
-    <View>
-      <Header />
-      <Icon.Button
-        name="google"
-        backgroundColor="#DD4B39"
-        onPress={this.loginWithGoogle}
-        >
-        Google
-      </Icon.Button>
-    </View>
-
-    )
   }
 }
-
+//
 // const iconStyles = {
 //   borderRadius: 10,
 //   iconStyle: { paddingVertical: 5 },
