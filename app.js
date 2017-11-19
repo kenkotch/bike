@@ -44,6 +44,7 @@ export default class App extends Component {
     if (Platform.OS === 'ios') {
       SafariView.dismiss();
     }
+    console.log('this.state.user', this.state.user)
   };
 
   // Handle Login with Facebook button tap
@@ -75,6 +76,7 @@ export default class App extends Component {
           ? // Show user info if already logged in
             <View style={styles.containter}>
               <Header />
+              <Text>Welcome { this.state.user }</Text>
             </View>
           : // Show log in message if not
             <View>
