@@ -147,8 +147,7 @@ export default class App extends Component {
       <View>
         { user
           ? // Show user info if already logged in
-            <View style={ styles.background }>
-              <Header />
+            <View>
               <Maintenance
                 updateBrakes={this.updateBrakes} brake_pads={this.state.brake_pads}
                 updateChains={this.updateChains} chain={this.state.chain}
@@ -156,7 +155,6 @@ export default class App extends Component {
               />
             </View>
           : // Show log in message if not
-
             <View>
               <Login
                 loginWithGoogle={ this.loginWithGoogle.bind(this) }
