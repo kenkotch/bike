@@ -182,7 +182,6 @@ export default class App extends Component {
           </Router>
         </View>
           : // Show log in message if not
-
             <View>
               <Login
                 loginWithGoogle={ this.loginWithGoogle.bind(this) }
@@ -198,7 +197,7 @@ export default class App extends Component {
 
 
 
-// 
+//
 // <View style={ styles.background }>
 //   <Header />
 //   <Maintenance
