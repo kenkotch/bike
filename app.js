@@ -203,7 +203,7 @@ export default class App extends Component {
         console.log(responseJson)
         this.setState({ responser: responseJson })
         let lat1 = this.state.responser.snappedPoints[0].location.latitude
-        let lon1 = -122.233 // this.state.responser.snappedPoints[0].location.longitude
+        let lon1 = this.state.responser.snappedPoints[0].location.longitude // -122.233
         let lat2 = this.state.responser.snappedPoints[this.state.responser.snappedPoints.length - 1].location.latitude
         let lon2 = this.state.responser.snappedPoints[this.state.responser.snappedPoints.length - 1].location.longitude
         getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2)
