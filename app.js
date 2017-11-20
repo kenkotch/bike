@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, Linking, StyleSheet, Platform, View } from 'react-native';
+import { Image, Linking, StyleSheet, Platform, View, AppRegistry, TextInput } from 'react-native';
 import { Router, Scene, navBar } from 'react-native-router-flux';
 import { Container, Button, Text } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -30,6 +30,8 @@ export default class App extends Component {
        responser: [],
        distanceAppender: '',
        appResponse: [],
+       addMiles: '',
+       addMilesState: '',
        fetchThis: 'https://roads.googleapis.com/v1/snapToRoads?path='
      };
      this.getLocation = this.getLocation.bind(this)
@@ -168,6 +170,23 @@ getLocation = () => {
                console.log(responseJson)
              })
               }
+              let addMiles = () => {
+              fetch('https://my-bike.herokuapp.com/components', {
+                  headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                  },
+                  method: 'PATCH',
+                  body: JSON.stringify( {email: 'sean.lemberg@gmail.com', mileage: Math.round(this.state.addMilesState)})
+                }).then((response) => response.json())
+               .then((responseJson) => {
+                 this.state({
+                   addMiles: responseJson
+                 })
+                 console.log(responseJson)
+               })
+                }
+
             // Haversine Formula
             // console.log("before distance", this.state.distanceAppender)
       let getDistanceFromLatLonInKm = (lat1, lon1, lat2, lon2) => {
@@ -181,6 +200,7 @@ getLocation = () => {
 
           this.setState({distanceAppender: mileCount})
           theMagicHappen()
+          addMiles()
           //console.log(this.state.distanceAppender)
           // console.log("TARGET", this.state.distanceAppender);
       }
@@ -200,11 +220,9 @@ getLocation = () => {
         setTimeout(this.getLocation, 100)
       }
 
-      // console.log('before magic', this.state.distanceAppender)
 
-        // console.log('after magic', this.state.distanceAppender)
-        // move function above the other
-        // see if this alters stateful scope
+        // console.log(this.state.addMilesState);
+
 
 
 
@@ -235,6 +253,16 @@ getLocation = () => {
               style={styles.stopButtonStyle}
             >
               <Text style={{fontFamily: 'Muli-Light'}}>S T O P</Text>
+            </Button>
+            <TextInput
+              style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+              onChangeText={(text) => this.setState({addMilesState: text})}
+              value={this.state.text}
+            />
+            <Button block full dark
+              onPress={stoppingWaterfall}
+            >
+              <Text style={{fontFamily: 'Muli-Light'}}>Add Miles</Text>
             </Button>
             </View>
           : // Show log in message if not
