@@ -109,7 +109,7 @@ export default class App extends Component {
        'Content-Type': 'application/json'
       },
       method: 'PATCH',
-      body: JSON.stringify( {email: this.state.user})
+      body: JSON.stringify( {email: 'sean.lemberg@gmail.com'})
         }).then((response) => response.json())
           .then((responseJson) => {
       console.log(responseJson)
@@ -125,7 +125,7 @@ export default class App extends Component {
        'Content-Type': 'application/json'
      },
      method: 'PATCH',
-     body: JSON.stringify( {email: this.state.user})
+     body: JSON.stringify( {email: 'sean.lemberg@gmail.com'})
     }).then((response) => response.json())
       .then((responseJson) => {
     console.log(responseJson)
@@ -141,7 +141,7 @@ export default class App extends Component {
         'Content-Type': 'application/json'
     },
     method: 'PATCH',
-    body: JSON.stringify( { email: this.state.user })
+    body: JSON.stringify( { email: 'sean.lemberg@gmail.com' })
     }).then((response) => response.json())
       .then((responseJson) => {
     console.log(responseJson)
@@ -158,7 +158,7 @@ export default class App extends Component {
         'Content-Type': 'application/json'
       },
       method: 'POST',
-      body: JSON.stringify( {email: this.state.user})
+      body: JSON.stringify( {email: 'sean.lemberg@gmail.com'})
         }).then((response) => response.json())
           .then((responseJson) => {
       this.setState({
@@ -229,7 +229,7 @@ export default class App extends Component {
           'Content-Type': 'application/json'
         },
         method: 'PATCH',
-        body: JSON.stringify( {email: this.state.user, mileage: Math.round(this.state.distanceAppender)})
+        body: JSON.stringify( {email: 'sean.lemberg@gmail.com', mileage: Math.round(this.state.distanceAppender)})
         }).then((response) => response.json())
           .then((responseJson) => {
             this.state({
@@ -246,7 +246,7 @@ export default class App extends Component {
         'Content-Type': 'application/json'
       },
       method: 'PATCH',
-      body: JSON.stringify( {email: this.state.user, mileage: Math.round(this.state.addMilesState)})
+      body: JSON.stringify( {email: 'sean.lemberg@gmail.com', mileage: Math.round(this.state.addMilesState)})
       }).then((response) => response.json())
         .then((responseJson) => {
           this.state({
