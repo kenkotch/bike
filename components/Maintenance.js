@@ -9,14 +9,22 @@ styles = require('../assets/stylesheet/Styles')
 class Maintenance extends React.Component{
   render(){
     return(
-    <View style={ styles.background }>
-      <Header />
-      <View>
-        <Brakes updateBrakes={this.props.updateBrakes} brake_pads={this.props.brake_pads}/>
-        <Chains updateChains={this.props.updateChains} chain={this.props.chain}/>
-        <Tires updateTires={this.props.updateTires} tires={this.props.tires}/>
+      <View style={ styles.background }>
+        <Header />
+        <Brakes
+          style={{ marginTop: 150 }}
+          updateBrakes={this.props.updateBrakes}
+          brake_pads={this.props.brake_pads}
+        />
+        <Chains
+          updateChains={this.props.updateChains}
+          chain={this.props.chain}
+        />
+        <Tires
+          updateTires={this.props.updateTires}
+          tires={this.props.tires}
+        />
       </View>
-    </View>
     )
   }
 }

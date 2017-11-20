@@ -14,8 +14,8 @@ class Brakes extends React.Component{
           Brakes: service in {this.props.brake_pads} miles
         </Text>
         <Button block full dark onPress={this.props.updateBrakes}>
-      <Text >update brakes</Text>
-    </Button>
+        <Text >update brakes</Text>
+        </Button>
       </View>
     )
   }

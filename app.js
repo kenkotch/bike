@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Image, Linking, StyleSheet, Platform, View } from 'react-native';
-import { Router, Scene, Stack, navBar } from 'react-native-router-flux';
+import { Router, Scene, Stack, Actions, navBar } from 'react-native-router-flux';
 import { Container, Button, Text } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
@@ -11,7 +11,7 @@ styles = require('./assets/stylesheet/Styles')
 
 import Login from './components/Login'
 import Header from './components/Header'
-// import Maintenance from './components/Maintenance'
+import Maintenance from './components/Maintenance'
 // import Bikes from './components/Bikes'
 import Test from './components/Test'
 import Test2 from './components/Test2'
@@ -19,12 +19,15 @@ import Test2 from './components/Test2'
 export default class App extends Component {
   constructor(props){
     super(props)
-    this.state={user:undefined, name: '', total_mileage: '', tires: '', chain: '', brake_pads: ''}
+    this.state={
+      user: undefined,
+      name: '',
+      total_mileage:
+      '', tires: '',
+      chain: '',
+      brake_pads: ''
+    }
   }
-
-  // state = {
-  //   user: undefined, // user has not logged in yet
-  // };
 
   // Set up Linking
   componentDidMount() {
@@ -49,18 +52,17 @@ export default class App extends Component {
     this.setState({
       // Decode the user string and parse it into JSON
       user: JSON.parse(decodeURI(user_string))
-    });
+    }, () => Actions.maintenance());
+
     if (Platform.OS === 'ios') {
       SafariView.dismiss();
     }
+
     console.log('this.state.user', this.state.user)
   };
 
-  // Handle Login with Facebook button tap
-  loginWithFacebook = () => this.openURL('http://localhost:3000/auth/facebook');
-
   // Handle Login with Google button tap
-  loginWithGoogle = () => this.openURL('https://my-bike.herokuapp.com/auth/google');
+  loginWithGoogle = () => this.openURL('https://my-bike.herokuapp.com/auth/google')
 
   // Open URL in a browser
   openURL = (url) => {
@@ -123,87 +125,124 @@ export default class App extends Component {
   }
   render() {
     const { user } = this.state;
-      // fetch('https://my-bike.herokuapp.com/components', {
-      //      headers: {
-      //        'Accept': 'application/json',
-      //        'Content-Type': 'application/json'
-      //      },
-      //      method: 'PATCH',
-      //      body: JSON.stringify( {email: this.state.user, mileage: 20})
-      //    }).then((response) => response.json())
-      //   .then((responseJson) => {
-      //     console.log(responseJson)
-      //   })
+
       fetch('https://my-bike.herokuapp.com/bikes', {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         method: 'POST',
-        body: JSON.stringify( {email: this.state.user})
-      }).then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({name: responseJson[0]['name'], total_mileage: responseJson[0]['total_mileage'], tires: responseJson[1]['tires'], chain: responseJson[1]['chain'], brake_pads: responseJson[1]['brake_pads']})
+        body: JSON.stringify( { email: this.state.user } )
+        }).then((response) => response.json())
+          .then((responseJson) => {
+          this.setState({name: responseJson[0]['name'], total_mileage: responseJson[0]['total_mileage'], tires: responseJson[1]['tires'], chain: responseJson[1]['chain'], brake_pads: responseJson[1]['brake_pads'] })
       })
+
     return (
-      <View>
-        { user
-          ? // Show user info if already logged in
 
-        <View>
-          <Router>
+      <Router>
+        <Scene key="root">
+          <Scene
+            hideNavBar
+            component={ Login }
+            key="login"
+            title="login"
+            loginWithGoogle={ this.loginWithGoogle.bind(this) }
+            initial
+          />
+          <Scene
+            hideNavBar
+            component={ Maintenance }
+            key="maintenance"
+            title="Maintenance"
+            updateBrakes={this.updateBrakes}
+            brake_pads={this.state.brake_pads}
+            updateChains={this.updateChains}
+            chain={this.state.chain}
+            updateTires={this.updateTires}
+            tires={this.state.tires}
+          />
+      </Scene>
+      </Router>
 
-            <Scene key="root">
-
-              <Scene
-                hideNavBar
-                key="header"
-                component={ Header }
-                title="Header"
-                />
-
-              <Scene
-                hideNavBar
-                key="test"
-                component={ Test }
-                title="test"
-                />
-
-            <Scene
-                hideNavBar
-                key="test2"
-                component={ Test2 }
-                title="test2"
-                initial
-                />
-
-            </Scene>
-
-          </Router>
-        </View>
-          : // Show log in message if not
-            <View>
-              <Login
-                loginWithGoogle={ this.loginWithGoogle.bind(this) }
-              />
-            </View>
-        }
-      </View>
     )
-
   }
 }
 
 
 
 
+
+
+
+
 //
-// <View style={ styles.background }>
-//   <Header />
-//   <Maintenance
-//     updateBrakes={this.updateBrakes} brake_pads={this.state.brake_pads}
-//     updateChains={this.updateChains} chain={this.state.chain}
-//     updateTires={this.updateTires} tires={this.state.tires}
-//   />
-// </View>
 //
+//       <View>
+//         { user
+//           ? // Show user info if already logged in
+//
+//           <Maintenance
+//             updateBrakes={this.updateBrakes}
+//             brake_pads={this.state.brake_pads}
+//             updateChains={this.updateChains}
+//             chain={this.state.chain}
+//             updateTires={this.updateTires}
+//             tires={this.state.tires}
+//           />
+//
+//
+//           : // Show log in message if not
+//             <View>
+//               <Login
+//                 loginWithGoogle={ this.loginWithGoogle.bind(this) }
+//               />
+//             </View>
+//         }
+//       </View>
+//     )
+//
+//   }
+// }
+
+
+
+
+
+
+
+// <Router>
+//
+//   <Scene key="root">
+//
+//     <Scene
+//       hideNavBar
+//       key="maintenance"
+//       component={ Maintenance }
+//       title="Maintenance"
+//       updateBrakes={this.updateBrakes}
+//       brake_pads={this.state.brake_pads}
+//       updateChains={this.updateChains}
+//       chain={this.state.chain}
+//       updateTires={this.updateTires}
+//       tires={this.state.tires}
+//       initial
+//       />
+//
+//     <Scene
+//       hideNavBar
+//       key="test"
+//       component={ Test }
+//       title="test"
+//       />
+//
+//     <Scene
+//       hideNavBar
+//       key="test2"
+//       component={ Test2 }
+//       title="test2"
+//       />
+//
+//   </Scene>
+//
+// </Router>
