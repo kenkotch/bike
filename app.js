@@ -132,8 +132,17 @@ getLocation = () => {
               renderTime();
               responser();
             }
+            let parentRenderTwo = () => {
+                renderTimeTwo();
+                responserTwo();
+              }
 
             let renderTime = () => {
+              let inceptionArray = this.state.holder.slice(1, this.state.holder.length);
+              fetching = `${fetchThis}` + inceptionArray + `&interpolate=true&key=AIzaSyBQSSqtL6ZXfausABmganfrNw6M6vZlXb0`
+              this.setState({waiter: fetching})
+            }
+            let renderTimeTwo = () => {
               let inceptionArray = this.state.holder.slice(1, this.state.holder.length);
               fetching = `${fetchThis}` + inceptionArray + `&interpolate=true&key=AIzaSyBQSSqtL6ZXfausABmganfrNw6M6vZlXb0`
               this.setState({waiter: fetching})
@@ -151,8 +160,20 @@ getLocation = () => {
                 console.error(error);
               });
             }
+            let responserTwo = () => {
+              return fetch(`${fetching}`).then((response) => response.json()).then((responseJson) => {
+                this.setState({responser: responseJson})
+                let lat1 = this.state.responser.snappedPoints[0].location.latitude
+                let lon1 = -122.233// this.state.responser.snappedPoints[0].location.longitude
+                let lat2 = this.state.responser.snappedPoints[this.state.responser.snappedPoints.length - 1].location.latitude
+                let lon2 = this.state.responser.snappedPoints[this.state.responser.snappedPoints.length - 1].location.longitude
+                getDistanceFromLatLonInKmTwo(lat1, lon1, lat2, lon2)
+              }).catch((error) => {
+                console.error(error);
+              });
+            }
             let theMagicHappen = () => {
-              console.log(typeof Math.round(this.state.distanceAppender))
+              // console.log(typeof Math.round(this.state.distanceAppender))
             fetch('https://my-bike.herokuapp.com/components', {
                 headers: {
                   'Accept': 'application/json',
@@ -176,7 +197,7 @@ getLocation = () => {
                     'Content-Type': 'application/json'
                   },
                   method: 'PATCH',
-                  body: JSON.stringify( {email: 'sean.lemberg@gmail.com', mileage: (Math.round(this.state.addMilesState) - Math.round(this.state.distanceAppender))})
+                  body: JSON.stringify( {email: 'sean.lemberg@gmail.com', mileage: Math.round(this.state.addMilesState)})
                 }).then((response) => response.json())
                .then((responseJson) => {
                  this.state({
@@ -199,6 +220,19 @@ getLocation = () => {
 
           this.setState({distanceAppender: mileCount})
           theMagicHappen()
+          //console.log(this.state.distanceAppender)
+          // console.log("TARGET", this.state.distanceAppender);
+      }
+      let getDistanceFromLatLonInKmTwo = (lat1, lon1, lat2, lon2) => {
+          var R = 6371; // Radius of the earth in km
+          var dLat = deg2rad(lat2 - lat1); // deg2rad below
+          var dLon = deg2rad(lon2 - lon1);
+          var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+          var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+          var d = R * c; // Distance in km
+          var mileCount = ( d * 0.621371) // conversion to Miles
+
+          this.setState({addMiles: mileCount})
           addMiles()
           //console.log(this.state.distanceAppender)
           // console.log("TARGET", this.state.distanceAppender);
@@ -212,6 +246,11 @@ getLocation = () => {
       let stoppingWaterfall = () => {
         setTimeout(this.getLocation, 100)
         parentRender();
+        // theMagicHappen();
+      }
+      let stoppingWaterfallTwo = () => {
+        setTimeout(this.getLocation, 100)
+        parentRenderTwo();
         // theMagicHappen();
       }
 
@@ -259,7 +298,7 @@ getLocation = () => {
               value={this.state.text}
             />
             <Button block full dark
-              onPress={stoppingWaterfall}
+              onPress={stoppingWaterfallTwo}
             >
               <Text style={{fontFamily: 'Muli-Light'}}>Add Miles</Text>
             </Button>
