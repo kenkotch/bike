@@ -313,6 +313,8 @@ export default class App extends Component {
       // setTimeout(this.getLocation)
       // this.getLocation()
 
+    console.disableYellowBox = true
+
     return (
       <View>
         { user
