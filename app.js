@@ -37,6 +37,7 @@ export default class App extends Component {
       addMiles: '',
       addMilesState: '',
       truthy: true,
+      truthStop: false,
       fetchThis: 'https://roads.googleapis.com/v1/snapToRoads?path='
      }
      this.getLocation = this.getLocation.bind(this)
@@ -300,6 +301,7 @@ export default class App extends Component {
       let stoppingWaterfall = () => {
         setTimeout(this.getLocation, 100)
         parentRender()
+        falsify()
         // theMagicHappen();
       }
 
@@ -312,11 +314,25 @@ export default class App extends Component {
       let timeInitiate = () => {
         setTimeout(this.getLocation, 100)
         trueOrNot()
+        trueTwo()
       }
 
       let trueOrNot = () => {
         this.setState({
           truthy: false
+        })
+      }
+
+      let falsify = () => {
+        this.setState({
+          truthStop: false,
+          truthy: true
+        })
+      }
+
+      let trueTwo = () => {
+        this.setState({
+          truthStop: true
         })
       }
 
@@ -335,7 +351,7 @@ export default class App extends Component {
               <Text>chain { this.state.chain }</Text>
               <Text>brakes { this.state.brake_pads }</Text>
 
-              <Text>TEST====> { this.state.distanceAppender }</Text>
+              {/* <Text>TEST====> { this.state.holder }</Text> */}
 
               {/* <Switch
                 onValueChange={(value) => this.setState({falseSwitchIsOn: value})}
@@ -347,6 +363,7 @@ export default class App extends Component {
               <Button block full dark
                 onPress={timeInitiate}
                 style={styles.startButtonStyle}
+                disabled={this.state.truthStop}
               >
                 <Text style={{fontFamily: 'Muli-Light'}}>S T A R T</Text>
               </Button>
