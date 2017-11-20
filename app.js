@@ -163,10 +163,10 @@ getLocation = () => {
             let responserTwo = () => {
               return fetch(`${fetching}`).then((response) => response.json()).then((responseJson) => {
                 this.setState({responser: responseJson})
-                let lat1 = this.state.responser.snappedPoints[0].location.latitude
-                let lon1 = -122.233// this.state.responser.snappedPoints[0].location.longitude
-                let lat2 = this.state.responser.snappedPoints[this.state.responser.snappedPoints.length - 1].location.latitude
-                let lon2 = this.state.responser.snappedPoints[this.state.responser.snappedPoints.length - 1].location.longitude
+                let lat1 = 0//this.state.responser.snappedPoints[0].location.latitude
+                let lon1 = 0// this.state.responser.snappedPoints[0].location.longitude
+                let lat2 = 0//this.state.responser.snappedPoints[this.state.responser.snappedPoints.length - 1].location.latitude
+                let lon2 = 0//this.state.responser.snappedPoints[this.state.responser.snappedPoints.length - 1].location.longitude
                 getDistanceFromLatLonInKmTwo(lat1, lon1, lat2, lon2)
               }).catch((error) => {
                 console.error(error);
@@ -251,6 +251,7 @@ getLocation = () => {
       let stoppingWaterfallTwo = () => {
         setTimeout(this.getLocation, 100)
         parentRenderTwo();
+
         // theMagicHappen();
       }
 
@@ -258,10 +259,10 @@ getLocation = () => {
         setTimeout(this.getLocation, 100)
       }
 
-
         // console.log(this.state.addMilesState);
+      // setTimeout(this.getLocation)
 
-
+      // this.getLocation()
 
 
     return (
@@ -277,8 +278,8 @@ getLocation = () => {
               <Text>chain { this.state.chain }</Text>
               <Text>brakes { this.state.brake_pads }</Text>
               {/* <Text>{this.state.user}</Text> */}
-              {/* <Text>{this.state.holder}</Text> */}
-              <Text>{this.state.distanceAppender}</Text>
+              {/* <Text>{this.state.holder}</Text>
+              <Text>{this.state.distanceAppender}</Text> */}
               {/* <Text>{this.responseJson}</Text> */}
               <Button block full dark
               onPress={timeInitiate}
@@ -300,7 +301,7 @@ getLocation = () => {
             <Button block full dark
               onPress={stoppingWaterfallTwo}
             >
-              <Text style={{fontFamily: 'Muli-Light'}}>Add Miles</Text>
+              <Text style={{fontFamily: 'Muli-Light'}}>ADD MILES</Text>
             </Button>
             </View>
           : // Show log in message if not
