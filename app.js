@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Image, Linking, StyleSheet, Platform, View, AppRegistry, TextInput, Switch } from 'react-native';
 import { Router, Scene, navBar } from 'react-native-router-flux';
 import { Container, Button, Text } from 'native-base';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import { Jiro } from 'react-native-textinput-effects';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
 import Brakes from './components/Brakes'
@@ -309,6 +311,8 @@ export default class App extends Component {
         setTimeout(this.getLocation, 100)
       }
 
+
+
       // console.log(this.state.addMilesState);
       // setTimeout(this.getLocation)
       // this.getLocation()
@@ -340,18 +344,27 @@ export default class App extends Component {
                 <Text style={{fontFamily: 'Muli-Light'}}>S T O P</Text>
               </Button>
 
-              <TextInput
+              <Jiro
+               label={'Add Miles Here'}
+               // this is used as active and passive border color
+               borderColor={'white'}
+               ref={input => { this.textInput = input }}
+               onChangeText={(text) => this.setState({addMilesState: text})}
+             />
+
+
+              {/* <TextInput
                 ref={input => { this.textInput = input }}
-                style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                style={{height: 40, borderColor: 'white', borderWidth: 2}}
                 onChangeText={(text) => this.setState({addMilesState: text})}
                 value={this.state.text}
-              />
+                placeholder = "Please Add Miles Here"
+              /> */}
               <Button block full dark
                 onPress={stoppingWaterfallTwo}
               >
                 <Text style={{fontFamily: 'Muli-Light'}}>ADD MILES</Text>
               </Button>
-
               <Maintenance
                 updateBrakes={this.updateBrakes}
                 brake_pads={this.state.brake_pads}
