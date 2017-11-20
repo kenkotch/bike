@@ -36,6 +36,7 @@ export default class App extends Component {
       appResponse: [],
       addMiles: '',
       addMilesState: '',
+      truthy: true,
       fetchThis: 'https://roads.googleapis.com/v1/snapToRoads?path='
      }
      this.getLocation = this.getLocation.bind(this)
@@ -46,6 +47,7 @@ export default class App extends Component {
       holder: [this.state.holder] + '|' + [position.coords.latitude, position.coords.longitude]
     })
   }
+
 
   getLocation = () => {
     if (navigator.geolocation) {
@@ -309,13 +311,15 @@ export default class App extends Component {
 
       let timeInitiate = () => {
         setTimeout(this.getLocation, 100)
+        trueOrNot()
       }
 
+      let trueOrNot = () => {
+        this.setState({
+          truthy: false
+        })
+      }
 
-
-      // console.log(this.state.addMilesState);
-      // setTimeout(this.getLocation)
-      // this.getLocation()
 
     console.disableYellowBox = true
 
@@ -331,6 +335,15 @@ export default class App extends Component {
               <Text>chain { this.state.chain }</Text>
               <Text>brakes { this.state.brake_pads }</Text>
 
+              <Text>TEST====> { this.state.distanceAppender }</Text>
+
+              {/* <Switch
+                onValueChange={(value) => this.setState({falseSwitchIsOn: value})}
+                onChange={stoppingWaterfall}
+                style={{marginBottom: 10}}
+                value={this.state.falseSwitchIsOn}
+              /> */}
+
               <Button block full dark
                 onPress={timeInitiate}
                 style={styles.startButtonStyle}
@@ -340,6 +353,7 @@ export default class App extends Component {
               <Button block full dark
                 onPress={stoppingWaterfall}
                 style={styles.stopButtonStyle}
+                disabled={this.state.truthy}
               >
                 <Text style={{fontFamily: 'Muli-Light'}}>S T O P</Text>
               </Button>
@@ -351,7 +365,6 @@ export default class App extends Component {
                ref={input => { this.textInput = input }}
                onChangeText={(text) => this.setState({addMilesState: text})}
              />
-
 
               {/* <TextInput
                 ref={input => { this.textInput = input }}
