@@ -4,6 +4,9 @@ import { Router, Scene, navBar } from 'react-native-router-flux';
 import { Container, Button, Text } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
+import Brakes from './components/Brakes'
+import Chains from './components/Chains'
+import Tires from './components/Tires'
 styles = require('./assets/stylesheet/Styles')
 
 import Login from './components/Login'
@@ -110,7 +113,51 @@ getLocation = () => {
       Linking.openURL(url);
     }
   };
-
+  updateTires=()=>{
+    console.log('tires')
+  fetch('https://my-bike.herokuapp.com/components/tires', {
+       headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json'
+       },
+       method: 'PATCH',
+       body: JSON.stringify( {email: this.state.user})
+     }).then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson)
+      this.setState({tires: responseJson})
+    })
+  }
+  updateChains=()=>{
+    console.log('chain')
+    fetch('https://my-bike.herokuapp.com/components/chain', {
+         headers: {
+           'Accept': 'application/json',
+           'Content-Type': 'application/json'
+         },
+         method: 'PATCH',
+         body: JSON.stringify( {email: this.state.user})
+       }).then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson)
+        this.setState({chain: responseJson})
+      })
+  }
+  updateBrakes=()=>{
+    console.log('brakes')
+    fetch('https://my-bike.herokuapp.com/components/brakes', {
+         headers: {
+           'Accept': 'application/json',
+           'Content-Type': 'application/json'
+         },
+         method: 'PATCH',
+         body: JSON.stringify( {email: this.state.user})
+       }).then((response) => response.json())
+      .then((responseJson) => {
+        console.log(responseJson)
+        this.setState({brake_pads: responseJson})
+      })
+  }
   render() {
     const { user } = this.state;
 
@@ -310,7 +357,6 @@ getLocation = () => {
 
             </View>
           : // Show log in message if not
-
             <View>
               <Login
                 loginWithGoogle={ this.loginWithGoogle.bind(this) }
