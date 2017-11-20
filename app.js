@@ -195,11 +195,12 @@ export default class App extends Component {
       this.setState({ waiter: fetching })
     }
 
-    // called for Start/Stop
+    // called for Stop
     let responser = async () => {
       return await fetch(`${ fetching }`)
       .then( async response => await response.json() )
       .then( responseJson => {
+        console.log(responseJson)
         this.setState({ responser: responseJson })
         let lat1 = this.state.responser.snappedPoints[0].location.latitude
         let lon1 = -122.233 // this.state.responser.snappedPoints[0].location.longitude
@@ -241,6 +242,7 @@ export default class App extends Component {
             } )
          console.log(responseJson)
         })
+        .catch( err => console.log(err) )
     }
 
     let addMiles = async () => {
@@ -269,7 +271,7 @@ export default class App extends Component {
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
         var d = R * c // Distance in km
         var mileCount = ( d * 0.621371) // conversion to Miles
-
+        console.log(mileCount)
         this.setState({ distanceAppender: mileCount })
         theMagicHappen()
       }
