@@ -153,8 +153,6 @@ getLocation = () => {
             }
             let theMagicHappen = () => {
               console.log(typeof Math.round(this.state.distanceAppender))
-
-
             fetch('https://my-bike.herokuapp.com/components', {
                 headers: {
                   'Accept': 'application/json',
@@ -170,6 +168,7 @@ getLocation = () => {
                console.log(responseJson)
              })
               }
+
               let addMiles = () => {
               fetch('https://my-bike.herokuapp.com/components', {
                   headers: {
@@ -177,7 +176,7 @@ getLocation = () => {
                     'Content-Type': 'application/json'
                   },
                   method: 'PATCH',
-                  body: JSON.stringify( {email: 'sean.lemberg@gmail.com', mileage: Math.round(this.state.addMilesState)})
+                  body: JSON.stringify( {email: 'sean.lemberg@gmail.com', mileage: (Math.round(this.state.addMilesState) - Math.round(this.state.distanceAppender))})
                 }).then((response) => response.json())
                .then((responseJson) => {
                  this.state({
