@@ -302,7 +302,7 @@ export default class App extends Component {
       let stoppingWaterfallTwo = () => {
         setTimeout(this.getLocation, 100)
         parentRenderTwo()
-        // theMagicHappen()
+        this.textInput.clear()
       }
 
       let timeInitiate = () => {
@@ -341,6 +341,7 @@ export default class App extends Component {
               </Button>
 
               <TextInput
+                ref={input => { this.textInput = input }}
                 style={{height: 40, borderColor: 'gray', borderWidth: 1}}
                 onChangeText={(text) => this.setState({addMilesState: text})}
                 value={this.state.text}
