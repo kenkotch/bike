@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, Linking, StyleSheet, Platform, View, AppRegistry, TextInput } from 'react-native';
+import { Image, Linking, StyleSheet, Platform, View, AppRegistry, TextInput, Switch } from 'react-native';
 import { Router, Scene, navBar } from 'react-native-router-flux';
 import { Container, Button, Text } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -277,6 +277,8 @@ getLocation = () => {
               <Text>tires { this.state.tires }</Text>
               <Text>chain { this.state.chain }</Text>
               <Text>brakes { this.state.brake_pads }</Text>
+              {/* <Text>distanceAppender { this.state.distanceAppender }</Text>
+              <Text>holder { this.state.holder }</Text> */}
               {/* <Text>{this.state.user}</Text> */}
               {/* <Text>{this.state.holder}</Text>
               <Text>{this.state.distanceAppender}</Text> */}
@@ -293,6 +295,7 @@ getLocation = () => {
             >
               <Text style={{fontFamily: 'Muli-Light'}}>S T O P</Text>
             </Button>
+
             <TextInput
               style={{height: 40, borderColor: 'gray', borderWidth: 1}}
               onChangeText={(text) => this.setState({addMilesState: text})}
@@ -303,6 +306,8 @@ getLocation = () => {
             >
               <Text style={{fontFamily: 'Muli-Light'}}>ADD MILES</Text>
             </Button>
+
+
             </View>
           : // Show log in message if not
 
