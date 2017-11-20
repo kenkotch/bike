@@ -7,16 +7,16 @@ import SafariView from 'react-native-safari-view';
 
 
 class Chains extends React.Component{
-  render(){
+  render() {
 
-    return(
+    return (
       <View>
         <Text>
           Chain service in {this.props.chain} miles
         </Text>
         <Button block full dark onPress={this.props.updateChains}>
-      <Text >update chain</Text>
-    </Button>
+          <Text>update chain</Text>
+        </Button>
       </View>
     )
   }

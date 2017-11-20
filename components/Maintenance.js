@@ -10,7 +10,7 @@ class Maintenance extends React.Component{
   render(){
     return(
     <View style={ styles.background }>
-      <Header />
+      {/*<Header />*/}
       <View>
         <Brakes updateBrakes={this.props.updateBrakes} brake_pads={this.props.brake_pads}/>
         <Chains updateChains={this.props.updateChains} chain={this.props.chain}/>

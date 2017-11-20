@@ -8,13 +8,13 @@ import SafariView from 'react-native-safari-view';
 // onPress={onPressLearnMore}
 
 class Tires extends React.Component{
-  render(){
+  render() {
     return(
       <View>
         <Text>Tires service in {this.props.tires} miles</Text>
         <Button block full dark onPress={this.props.updateTires}>
-      <Text >update tires</Text>
-    </Button>
+          <Text >update tires</Text>
+        </Button>
       </View>
     )
   }

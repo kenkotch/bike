@@ -7,15 +7,15 @@ import SafariView from 'react-native-safari-view';
 
 
 class Brakes extends React.Component{
-  render(){
+  render() {
     return(
       <View>
         <Text>
           Brakes: service in {this.props.brake_pads} miles
         </Text>
         <Button block full dark onPress={this.props.updateBrakes}>
-      <Text >update brakes</Text>
-    </Button>
+          <Text >update brakes</Text>
+        </Button>
       </View>
     )
   }
