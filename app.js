@@ -296,6 +296,7 @@ export default class App extends Component {
         await this.setState({addMilesState: text})
         await console.log(this.state.addMilesState)
         await addMiles()
+        await this.textInput.clear()
       }
 
       // Haversine Formula
@@ -336,7 +337,6 @@ export default class App extends Component {
       let stoppingWaterfallTwo = () => {
         setTimeout(this.getLocation, 100)
         parentRenderTwo()
-        this.textInput.clear()
       }
 
       let timeInitiate = () => {
