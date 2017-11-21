@@ -152,16 +152,14 @@ export default class App extends Component {
   addMiles=(text)=>{
     this.setState({addMilesState: text})
   }
-  newBike=(name, mileage)=>{
-    console.log('name:', name)
-    console.log('mileage:', mileage)
+  newBike=(name, mileage, sinceRepair)=>{
     fetch('https://my-bike.herokuapp.com/bikes/add', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       method: 'POST',
-      body: JSON.stringify( {name: name, total_mileage: mileage})
+      body: JSON.stringify( {name: name, total_mileage: mileage, sinceRepair: sinceRepair })
         }).then((response) => response.json())
           .then((responseJson) => {
               console.log(responseJson)
