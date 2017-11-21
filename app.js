@@ -165,7 +165,15 @@ export default class App extends Component {
         }).then((response) => response.json())
           .then((responseJson) => {
               console.log(responseJson)
-              this.setState({ternary: true})
+              this.setState({
+                name: responseJson[0]['name'],
+                total_mileage: responseJson[0]['total_mileage'],
+                tires: responseJson[1]['tires'],
+                chain: responseJson[1]['chain'],
+                brake_pads: responseJson[1]['brake_pads'],
+                ternary:true
+              })
+
     })
   }
 
@@ -185,7 +193,7 @@ export default class App extends Component {
 
             if(responseJson[0]==='created'){
               this.setState({ternary: false})
-            }else if(responseJson[0]!=='created'){
+            }else if(responseJson!=='created'){
               this.setState({
                 name: responseJson[0]['name'],
                 total_mileage: responseJson[0]['total_mileage'],
@@ -194,8 +202,12 @@ export default class App extends Component {
                 brake_pads: responseJson[1]['brake_pads']
               })
             }
+
+            console.log(this.state)
+            // if(this.state.name===""){
+            //   this.setState({ternary: false})
+            // }
     })
-    console.log(this.state)
 
     let fetching
 
