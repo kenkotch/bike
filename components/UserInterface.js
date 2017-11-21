@@ -12,9 +12,10 @@ styles = require('../assets/stylesheet/Styles')
 let fetchThis = 'https://roads.googleapis.com/v1/snapToRoads?path='
 // onChangeText={(text) => this.setState({addMilesState: text})}
 class UserInterface extends Component{
-  componentDidMount(){
+  componentDidMount() {
     console.log(this.props)
   }
+
   render() {
     return(
       <View>
@@ -83,7 +84,6 @@ class UserInterface extends Component{
       </View>
 }
     </View>
-
 
     )
   }
