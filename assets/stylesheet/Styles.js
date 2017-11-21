@@ -71,7 +71,8 @@ module.exports = StyleSheet.create({
     fontFamily: 'Muli',
     fontSize: 18,
     width: '55%',
-    marginLeft: '25%'
+    marginLeft: '25%',
+    marginTop: 7
   }
 
 });

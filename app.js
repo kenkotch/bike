@@ -339,39 +339,41 @@ export default class App extends Component {
               <Text style={ styles.bikeName }>{ this.state.name }</Text>
               <Text style={ styles.maintData }>Total Distance: { this.state.total_mileage } Miles</Text>
 
-                    {/* show/hide START button */}
-                    { !this.state.truthStop &&
-                        <Button
-                          dark
-                          onPress={ timeInitiate }
-                          style={ styles.startStopButtonStyle }
-                        >
-                          <Text>S T A R T</Text>
-                        </Button>
-                    }
+                {/* show/hide START button */}
+                { !this.state.truthStop &&
+                    <Button
+                      success
+                      onPress={ timeInitiate }
+                      style={ styles.startStopButtonStyle }
+                    >
+                      <Text>S T A R T</Text>
+                    </Button>
+                }
 
-                    {/* show/hide STOP button */}
-                    { this.state.truthStop &&
-                        <Button dark
-                          onPress={ stoppingWaterfall }
-                          style={ styles.startStopButtonStyle }
-                        >
-                          <Text style={{ fontFamily: 'Muli-Light' }}> S T O P </Text>
-                        </Button>
-                    }
+                {/* show/hide STOP button */}
+                { this.state.truthStop &&
+                    <Button
+                      danger
+                      onPress={ stoppingWaterfall }
+                      style={ styles.startStopButtonStyle }
+                    >
+                      <Text>S T O P</Text>
+                    </Button>
+                }
 
-              <Jiro
-                label={'Add Miles Here'}
-                borderColor={'white'}
-                ref={input => { this.textInput = input }}
-                onChangeText={text => this.setState({ addMilesState: text })}
-              />
+                {/* Add Miles Manually */}
+                <Jiro
+                  label={'Add Miles Here'}
+                  borderColor={'white'}
+                  ref={input => { this.textInput = input }}
+                  onChangeText={text => this.setState({ addMilesState: text })}
+                  />
+                <Button block full dark
+                  onPress={stoppingWaterfallTwo}
+                  >
+                  <Text style={{fontFamily: 'Muli-Light'}}>ADD MILES</Text>
+                </Button>
 
-              <Button block full dark
-                onPress={stoppingWaterfallTwo}
-              >
-                <Text style={{fontFamily: 'Muli-Light'}}>ADD MILES</Text>
-              </Button>
               <Maintenance
                 updateBrakes={this.updateBrakes}
                 brake_pads={this.state.brake_pads}
@@ -380,6 +382,7 @@ export default class App extends Component {
                 updateTires={this.updateTires}
                 tires={this.state.tires}
               />
+
 
             </View>
           : // Show log in message if not
