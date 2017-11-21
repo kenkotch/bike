@@ -51,6 +51,7 @@ class UserInterface extends Component{
                 {/*need text function! onChangeText={ text => this.setState({ addMilesState: text }) } */}
                 {/* Add Miles Manually */}
                 <Jiro
+                  keyboardType={ 'numeric' }
                   label={ 'Add Miles Here' }
                   borderColor={ 'gray' }
                   ref={ input => { this.textInput = input } }
