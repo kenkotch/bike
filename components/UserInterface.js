@@ -63,6 +63,7 @@ class UserInterface extends Component{
                   style={ styles.milesButton }
                   dark
                   onPress={ this.props.stoppingWaterfallTwo }
+                  ref={ input => { this.textInput = input } }
                 >
                   <Text>ADD</Text>
                 </Button>

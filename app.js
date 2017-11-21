@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import { Image, Linking, StyleSheet, Platform, View, AppRegistry, TextInput, Switch, Text as Texter } from 'react-native';
-import { Router, Scene, navBar } from 'react-native-router-flux';
-import { Container, Button, Text, Content, Badge } from 'native-base';
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import { Jiro } from 'react-native-textinput-effects';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import SafariView from 'react-native-safari-view';
+import React, { Component } from 'react'
+import { Image, Linking, StyleSheet, Platform, View, AppRegistry, TextInput, Switch, Text as Texter } from 'react-native'
+import { Container, Button, Text, Content, Badge } from 'native-base'
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome'
+import { Jiro } from 'react-native-textinput-effects'
+import Icon from 'react-native-vector-icons/FontAwesome'
+import SafariView from 'react-native-safari-view'
 import Brakes from './components/Brakes'
 import Chains from './components/Chains'
 import Tires from './components/Tires'
@@ -181,7 +180,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { user } = this.state;
+    const { user } = this.state
     fetch('https://my-bike.herokuapp.com/bikes', {
       headers: {
         'Accept': 'application/json',
@@ -225,13 +224,13 @@ export default class App extends Component {
     }
 
     let renderTime = () => {
-      let inceptionArray = this.state.holder.slice(1, this.state.holder.length);
+      let inceptionArray = this.state.holder.slice(1, this.state.holder.length)
       fetching = `${fetchThis}` + inceptionArray + `&interpolate=true&key=AIzaSyBQSSqtL6ZXfausABmganfrNw6M6vZlXb0`
       this.setState({ waiter: fetching })
     }
 
     let renderTimeTwo = () => {
-      let inceptionArray = this.state.holder.slice(1, this.state.holder.length);
+      let inceptionArray = this.state.holder.slice(1, this.state.holder.length)
       fetching = `${ fetchThis }` + inceptionArray + `&interpolate=true&key=AIzaSyBQSSqtL6ZXfausABmganfrNw6M6vZlXb0`
       this.setState({ waiter: fetching })
     }
@@ -305,7 +304,7 @@ export default class App extends Component {
 
       // Haversine Formula
       let getDistanceFromLatLonInKm = (lat1, lon1, lat2, lon2) => {
-        var R = 6371; // Radius of the earth in km
+        var R = 6371 // Radius of the earth in km
         var dLat = deg2rad(lat2 - lat1) // deg2rad below
         var dLon = deg2rad(lon2 - lon1)
         var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2)
@@ -318,12 +317,12 @@ export default class App extends Component {
       }
 
       let getDistanceFromLatLonInKmTwo = (lat1, lon1, lat2, lon2) => {
-        var R = 6371; // Radius of the earth in km
+        var R = 6371 // Radius of the earth in km
         var dLat = deg2rad(lat2 - lat1) // deg2rad below
         var dLon = deg2rad(lon2 - lon1)
         var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2)
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-        var d = R * c; // Distance in km
+        var d = R * c // Distance in km
         var mileCount = ( d * 0.621371) // conversion to Miles
 
         this.setState({ addMiles: mileCount })
