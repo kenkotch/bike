@@ -336,8 +336,6 @@ export default class App extends Component {
         })
       }
 
-      // setTimeout(timeInitiate, 10000)
-
 
     console.disableYellowBox = true
 
@@ -354,7 +352,7 @@ export default class App extends Component {
               <Text>brakes { this.state.brake_pads }</Text>
 
               <Text>TEST====> { this.state.holder }</Text>
-              <Text>TEST====> { this.state.distanceAppender }</Text>
+              <Text>TEST====> { this.state.holder }</Text>
 
               {/* <Switch
                 onValueChange={(value) => this.setState({falseSwitchIsOn: value})}
