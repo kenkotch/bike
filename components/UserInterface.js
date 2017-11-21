@@ -16,10 +16,10 @@ class UserInterface extends Component{
     super(props)
     this.state={addMilesState: ''}
   }
-  componentDidUpdate(){
-    console.log('fuck you')
-  }
+
+  this.props.addMiles(this.state.addMilesState)
   render() {
+    //console.log(this.state)
     return(
       <View>
         { this.props.user

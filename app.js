@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Image, Linking, StyleSheet, Platform, View, AppRegistry, TextInput, Switch, Text as Texter } from 'react-native';
-import { Router, Scene, navBar } from 'react-native-router-flux';
 import { Container, Button, Text, Content, Badge } from 'native-base';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { Jiro } from 'react-native-textinput-effects';
@@ -152,9 +151,18 @@ export default class App extends Component {
     this.setState({brake_pads: responseJson} )
       })
   }
+
+
+
+
   addMiles=(text)=>{
     this.setState({addMilesState: text})
   }
+
+
+
+
+
   newBike=(name, mileage, sinceRepair)=>{
     console.log('name:', name)
     console.log('mileage:', mileage)
@@ -285,7 +293,10 @@ export default class App extends Component {
         .catch( err => console.log(err) )
     }
 
-    let addMiles = async () => {
+    let addMiles = async (param) => {
+
+
+      if(!param){
       await fetch('https://my-bike.herokuapp.com/components', {
       headers: {
         'Accept': 'application/json',
@@ -300,7 +311,10 @@ export default class App extends Component {
           })
         console.log(responseJson)
         } )
+      }else if(param){
+
       }
+    }
 
       // Haversine Formula
       let getDistanceFromLatLonInKm = (lat1, lon1, lat2, lon2) => {
@@ -392,6 +406,7 @@ export default class App extends Component {
               loginWithGoogle={ this.loginWithGoogle.bind(this) }
               truthStop={ this.state.truthStop }
               truthy={ this.state.truthy }
+              addMiles={this.addMiles}
             />
           :
           <Ternary newBike={ this.newBike }/>
