@@ -1,26 +1,26 @@
 import React, { Component } from 'react';
-import { Image, Linking, StyleSheet, Platform, View, AppRegistry, TextInput, Switch } from 'react-native';
-import { Router, Scene, navBar } from 'react-native-router-flux';
+import { Image, Linking, StyleSheet, Platform, View, AppRegistry, TextInput, Text as Texter,  Switch } from 'react-native';
 import { Container, Button, Text } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
 import Brakes from './components/Brakes'
 import Chains from './components/Chains'
 import Tires from './components/Tires'
+import Ternary from './components/Ternary'
 styles = require('./assets/stylesheet/Styles')
 
 import Login from './components/Login'
 import Header from './components/Header'
 import Maintenance from './components/Maintenance'
+import UserInterface from './components/UserInterface'
 import Bikes from './components/Bikes'
-
 let fetchThis = 'https://roads.googleapis.com/v1/snapToRoads?path='
 
 export default class App extends Component {
   constructor(props){
     super(props)
     this.state={
-      user:undefined,
+      user: null,
       name: '',
       total_mileage: '',
       tires: '',
@@ -34,6 +34,7 @@ export default class App extends Component {
       appResponse: [],
       addMiles: '',
       addMilesState: '',
+      ternary: true,
       fetchThis: 'https://roads.googleapis.com/v1/snapToRoads?path='
      }
      this.getLocation = this.getLocation.bind(this)
@@ -80,7 +81,7 @@ export default class App extends Component {
     if (Platform.OS === 'ios') {
       SafariView.dismiss()
     }
-    console.log('this.state.user', this.state.user)
+    //console.log('this.state.user', this.state.user)
   }
 
   // Handle Login with Google button tap
@@ -148,10 +149,28 @@ export default class App extends Component {
     this.setState({brake_pads: responseJson})
       })
   }
+  addMiles=(text)=>{
+    this.setState({addMilesState: text})
+  }
+  newBike=(name, mileage)=>{
+    console.log('name:', name)
+    console.log('mileage:', mileage)
+    fetch('https://my-bike.herokuapp.com/bikes/add', {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify( {name: name, total_mileage: mileage})
+        }).then((response) => response.json())
+          .then((responseJson) => {
+              console.log(responseJson)
+              this.setState({ternary: true})
+    })
+  }
 
   render() {
     const { user } = this.state;
-    // look at line 161 for hard code man
     fetch('https://my-bike.herokuapp.com/bikes', {
       headers: {
         'Accept': 'application/json',
@@ -161,14 +180,22 @@ export default class App extends Component {
       body: JSON.stringify( {email: this.state.user})
         }).then((response) => response.json())
           .then((responseJson) => {
-      this.setState({
-        name: responseJson[0]['name'],
-        total_mileage: responseJson[0]['total_mileage'],
-        tires: responseJson[1]['tires'],
-        chain: responseJson[1]['chain'],
-        brake_pads: responseJson[1]['brake_pads']
-      })
+
+            console.log(responseJson)
+
+            if(responseJson[0]==='created'){
+              this.setState({ternary: false})
+            }else if(responseJson[0]!=='created'){
+              this.setState({
+                name: responseJson[0]['name'],
+                total_mileage: responseJson[0]['total_mileage'],
+                tires: responseJson[1]['tires'],
+                chain: responseJson[1]['chain'],
+                brake_pads: responseJson[1]['brake_pads']
+              })
+            }
     })
+    console.log(this.state)
 
     let fetching
 
@@ -317,59 +344,29 @@ export default class App extends Component {
 
     return (
       <View>
-        { user
-          ? // Show user info if already logged in
-            <View style={ styles.background }>
-              <Header />
-              <Text>name { this.state.name }</Text>
-              <Text>mileage { this.state.total_mileage }</Text>
-              <Text>tires { this.state.tires }</Text>
-              <Text>chain { this.state.chain }</Text>
-              <Text>brakes { this.state.brake_pads }</Text>
-
-              <Button block full dark
-                onPress={timeInitiate}
-                style={styles.startButtonStyle}
-              >
-                <Text style={{fontFamily: 'Muli-Light'}}>S T A R T</Text>
-              </Button>
-              <Button block full dark
-                onPress={stoppingWaterfall}
-                style={styles.stopButtonStyle}
-              >
-                <Text style={{fontFamily: 'Muli-Light'}}>S T O P</Text>
-              </Button>
-
-              <TextInput
-                style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                onChangeText={(text) => this.setState({addMilesState: text})}
-                value={this.state.text}
-              />
-              <Button block full dark
-                onPress={stoppingWaterfallTwo}
-              >
-                <Text style={{fontFamily: 'Muli-Light'}}>ADD MILES</Text>
-              </Button>
-
-              <Maintenance
-                updateBrakes={this.updateBrakes}
-                brake_pads={this.state.brake_pads}
-                updateChains={this.updateChains}
-                chain={this.state.chain}
-                updateTires={this.updateTires}
-                tires={this.state.tires}
-              />
-
-            </View>
-          : // Show log in message if not
-            <View>
-              <Login
-                loginWithGoogle={ this.loginWithGoogle.bind(this) }
-              />
-            </View>
+        {this.state.ternary
+          ?
+            <UserInterface
+              name={this.state.name}
+              total_mileage={this.state.total_mileage}
+              tires={this.state.tires}
+              chain={this.state.chain}
+              brake_pads={this.state.brake_pads}
+              timeInitiate={this.timeInitiate}
+              stoppingWaterfall={this.stoppingWaterfall}
+              stoppingWaterfallTwo={this.stoppingWaterfallTwo}
+              updateChains={this.updateChains}
+              updateBrakes={this.updateBrakes}
+              updateTires={this.updateTires}
+              user={this.state.user}
+              loginWithGoogle={ this.loginWithGoogle.bind(this) }
+            />
+          :
+          <Ternary newBike={this.newBike}/>
         }
-      </View>
-    )
+        </View>
 
+
+    )
   }
 }
