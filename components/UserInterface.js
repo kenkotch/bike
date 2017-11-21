@@ -19,7 +19,7 @@ class UserInterface extends Component{
   componentDidMount(){
     console.log(this.props)
   }
-  cascade=()=>{
+  cascade = () => {
     this.props.updateMiles(this.state.addMilesState)
   }
 
