@@ -79,7 +79,7 @@ module.exports = StyleSheet.create({
     marginLeft: '27%',
     justifyContent: 'center',
     backgroundColor: 'black',
-    marginBottom: 20
+    marginBottom: 40
   },
   milesInput: {
     width: '80%',

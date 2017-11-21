@@ -624,6 +624,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		48AE5FDD1FC4AD7C00F4C5FE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		48BE01AF1FBFCAB200F6B786 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -716,6 +723,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				01D3A76DFBE0460BB662BD65 /* Resources */,
 				48BE01AF1FBFCAB200F6B786 /* Recovered References */,
+				48AE5FDD1FC4AD7C00F4C5FE /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -833,6 +841,11 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 24VH3NZJ24;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
