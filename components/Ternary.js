@@ -5,8 +5,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
 styles = require('../assets/stylesheet/Styles')
 
-class Ternary extends React.Component{
-  constructor(props){
+class Ternary extends React.Component {
+  constructor(props) {
 
   super(props)
   this.state={name: '', mileage: '', sinceRepair: ''}
@@ -20,7 +20,7 @@ class Ternary extends React.Component{
     return(
       <View>
         <TextInput
-        style={{height: 40}}
+        style={{ height: 40}}
         placeholder="Bike Name"
         onChangeText={(name) => this.setState({name})}
       />
