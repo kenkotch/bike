@@ -55,7 +55,6 @@ class UserInterface extends Component{
                     </Button>
                 }
 
-                {/*need text function! onChangeText={ text => this.setState({ addMilesState: text }) } */}
                 {/* Add Miles Manually */}
                 <Jiro
                   keyboardType={ 'numeric' }

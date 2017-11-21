@@ -312,10 +312,10 @@ export default class App extends Component {
         console.log(responseJson)
         } )
       }
-      var updateMiles=(text)=>{
-        this.setState({addMilesState: text})
-        console.log(this.state.addMilesState)
-        addMiles()
+      var updateMiles = async (text) => {
+        await this.setState({addMilesState: text})
+        await console.log(this.state.addMilesState)
+        await addMiles()
       }
 
       // Haversine Formula
