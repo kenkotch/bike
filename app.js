@@ -203,7 +203,7 @@ export default class App extends Component {
       return fetch(`${fetching}`).then((response) => response.json()).then((responseJson) => {
         this.setState({responser: responseJson})
         let lat1 = this.state.responser.snappedPoints[0].location.latitude
-        let lon1 = -122.233 // this.state.responser.snappedPoints[0].location.longitude
+        let lon1 = this.state.responser.snappedPoints[0].location.longitude
         let lat2 = this.state.responser.snappedPoints[this.state.responser.snappedPoints.length - 1].location.latitude
         let lon2 = this.state.responser.snappedPoints[this.state.responser.snappedPoints.length - 1].location.longitude
         getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2)
@@ -336,6 +336,8 @@ export default class App extends Component {
         })
       }
 
+      // setTimeout(timeInitiate, 10000)
+
 
     console.disableYellowBox = true
 
@@ -351,7 +353,8 @@ export default class App extends Component {
               <Text>chain { this.state.chain }</Text>
               <Text>brakes { this.state.brake_pads }</Text>
 
-              {/* <Text>TEST====> { this.state.holder }</Text> */}
+              <Text>TEST====> { this.state.holder }</Text>
+              <Text>TEST====> { this.state.distanceAppender }</Text>
 
               {/* <Switch
                 onValueChange={(value) => this.setState({falseSwitchIsOn: value})}
