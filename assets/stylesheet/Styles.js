@@ -96,6 +96,10 @@ module.exports = StyleSheet.create({
   resetWord: {
     marginTop: 3,
     color: 'black'
+  },
+  rowText: {
+    width: '60%',
+    marginTop: 11
   }
 
 });

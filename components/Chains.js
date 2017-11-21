@@ -9,7 +9,7 @@ class Chains extends React.Component{
   render() {
     return (
       <View style={ styles.row }>
-        <Text style={{ marginTop: 11 }}>
+        <Text style={ styles.rowText }>
           Chain: service in { this.props.chain } miles
         </Text>
         <Button

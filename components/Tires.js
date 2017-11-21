@@ -8,7 +8,7 @@ class Tires extends Component {
   render() {
     return(
       <View style={ styles.row }>
-        <Text style={{ marginTop: 11 }}>
+        <Text style={ styles.rowText }>
           Tires: service in { this.props.tires } miles
         </Text>
         <Button

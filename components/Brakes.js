@@ -9,7 +9,7 @@ class Brakes extends Component {
   render() {
     return(
       <View style={ styles.row }>
-        <Text style={{ marginTop: 11 }}>
+        <Text style={ styles.rowText }>
           Brakes: service in { this.props.brake_pads } miles
         </Text>
         <Button
