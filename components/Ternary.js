@@ -9,12 +9,12 @@ class Ternary extends React.Component{
   constructor(props){
 
   super(props)
-  this.state={name: '', mileage: ''}
+  this.state={name: '', mileage: '', sinceRepair: ''}
 }
 
 
   sendNewBike=()=>{
-    this.props.newBike(this.state.name, this.state.mileage)
+    this.props.newBike(this.state.name, this.state.mileage, this.state.sinceRepair)
   }
   render() {
     return(
@@ -26,9 +26,14 @@ class Ternary extends React.Component{
       />
       <TextInput
       style={{height: 40}}
-      placeholder="Mileage"
+      placeholder="Total Mileage"
       onChangeText={(mileage) => this.setState({mileage})}
     />
+    <TextInput
+    style={{height: 40}}
+    placeholder="Mileage Since Repair"
+    onChangeText={(sinceRepair) => this.setState({sinceRepair})}
+  />
     <Button block full dark
       onPress={this.sendNewBike}
       style={styles.startButtonStyle}

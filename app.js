@@ -151,10 +151,21 @@ export default class App extends Component {
     this.setState({brake_pads: responseJson} )
       })
   }
-  addMiles=(text)=>{
-    this.setState({addMilesState: text})
-  }
-  newBike=(name, mileage)=>{
+
+
+
+
+  // updateMiles=(text)=>{
+  //   this.setState({addMilesState: text})
+  //   addMiles()
+  // }
+
+
+
+
+
+
+  newBike=(name, mileage, sinceRepair )=>{
     console.log('name:', name)
     console.log('mileage:', mileage)
     fetch('https://my-bike.herokuapp.com/bikes/add', {
@@ -163,7 +174,7 @@ export default class App extends Component {
         'Content-Type': 'application/json'
       },
       method: 'POST',
-      body: JSON.stringify( {name: name, total_mileage: mileage})
+      body: JSON.stringify( {name: name, total_mileage: mileage, sinceRepair: sinceRepair})
         }).then((response) => response.json())
           .then((responseJson) => {
               console.log(responseJson)
@@ -301,6 +312,11 @@ export default class App extends Component {
         console.log(responseJson)
         } )
       }
+      var updateMiles=(text)=>{
+        this.setState({addMilesState: text})
+        console.log(this.state.addMilesState)
+        addMiles()
+      }
 
       // Haversine Formula
       let getDistanceFromLatLonInKm = (lat1, lon1, lat2, lon2) => {
@@ -376,6 +392,7 @@ export default class App extends Component {
       <View>
         {this.state.ternary
           ?
+          <View>
             <UserInterface
               name={ this.state.name }
               total_mileage={ this.state.total_mileage }
@@ -392,7 +409,9 @@ export default class App extends Component {
               loginWithGoogle={ this.loginWithGoogle.bind(this) }
               truthStop={ this.state.truthStop }
               truthy={ this.state.truthy }
+              updateMiles={updateMiles}
             />
+        </View>
           :
           <Ternary newBike={ this.newBike }/>
         }
