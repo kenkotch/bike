@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { Image, Linking, StyleSheet, Platform, View, AppRegistry, TextInput, Text as Texter,  Switch } from 'react-native';
-import { Container, Button, Text } from 'native-base';
+import { Image, Linking, StyleSheet, Platform, View, AppRegistry, TextInput, Switch, Text as Texter } from 'react-native';
+import { Router, Scene, navBar } from 'react-native-router-flux';
+import { Container, Button, Text, Content, Badge } from 'native-base';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import { Jiro } from 'react-native-textinput-effects';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
 import Brakes from './components/Brakes'
@@ -17,7 +20,7 @@ import Bikes from './components/Bikes'
 let fetchThis = 'https://roads.googleapis.com/v1/snapToRoads?path='
 
 export default class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state={
       user: null,
@@ -34,6 +37,8 @@ export default class App extends Component {
       appResponse: [],
       addMiles: '',
       addMilesState: '',
+      truthy: true,
+      truthStop: false,
       ternary: true,
       fetchThis: 'https://roads.googleapis.com/v1/snapToRoads?path='
      }
@@ -48,7 +53,7 @@ export default class App extends Component {
 
   getLocation = () => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.showPosition);
+      navigator.geolocation.getCurrentPosition(this.showPosition)
     } else {
       console.log('broken')
     }
@@ -57,7 +62,7 @@ export default class App extends Component {
   // Set up Linking
   componentDidMount() {
     // Add event listener to handle OAuthLogin:// URLs
-    Linking.addEventListener('url', this.handleOpenURL);
+    Linking.addEventListener('url', this.handleOpenURL)
     // Launched from an external URL
     Linking.getInitialURL().then((url) => {
       if (url) {
@@ -68,20 +73,19 @@ export default class App extends Component {
 
   componentWillUnmount() {
     // Remove event listener
-    Linking.removeEventListener('url', this.handleOpenURL);
+    Linking.removeEventListener('url', this.handleOpenURL)
   }
 
   handleOpenURL = ({ url }) => {
     // Extract stringified user string out of the URL
-    const [, user_string] = url.match(/user=([^#]+)/);
+    const [, user_string] = url.match(/user=([^#]+)/)
     this.setState({
       // Decode the user string and parse it into JSON
-      user: JSON.parse(decodeURI(user_string))
+      user: JSON.parse( decodeURI(user_string) )
     })
     if (Platform.OS === 'ios') {
       SafariView.dismiss()
     }
-    //console.log('this.state.user', this.state.user)
   }
 
   // Handle Login with Google button tap
@@ -103,7 +107,6 @@ export default class App extends Component {
   }
 
   updateTires = () => {
-    console.log('tires')
     fetch('https://my-bike.herokuapp.com/components/tires', {
       headers: {
        'Accept': 'application/json',
@@ -111,8 +114,8 @@ export default class App extends Component {
       },
       method: 'PATCH',
       body: JSON.stringify( {email: this.state.user})
-        }).then((response) => response.json())
-          .then((responseJson) => {
+        }).then(response => response.json())
+          .then(responseJson => {
       console.log(responseJson)
       this.setState({ tires: responseJson })
       })
@@ -126,11 +129,11 @@ export default class App extends Component {
        'Content-Type': 'application/json'
      },
      method: 'PATCH',
-     body: JSON.stringify( {email: this.state.user})
-    }).then((response) => response.json())
-      .then((responseJson) => {
+     body: JSON.stringify( { email: this.state.user })
+    }).then( response => response.json() )
+      .then( responseJson => {
     console.log(responseJson)
-    this.setState({chain: responseJson})
+    this.setState({ chain: responseJson })
     })
   }
 
@@ -143,10 +146,10 @@ export default class App extends Component {
     },
     method: 'PATCH',
     body: JSON.stringify( { email: this.state.user })
-    }).then((response) => response.json())
-      .then((responseJson) => {
+    }).then( response => response.json() )
+      .then( responseJson => {
     console.log(responseJson)
-    this.setState({brake_pads: responseJson})
+    this.setState({brake_pads: responseJson} )
       })
   }
   addMiles=(text)=>{
@@ -165,7 +168,15 @@ export default class App extends Component {
         }).then((response) => response.json())
           .then((responseJson) => {
               console.log(responseJson)
-              this.setState({ternary: true})
+              this.setState({
+                name: responseJson[0]['name'],
+                total_mileage: responseJson[0]['total_mileage'],
+                tires: responseJson[1]['tires'],
+                chain: responseJson[1]['chain'],
+                brake_pads: responseJson[1]['brake_pads'],
+                ternary:true
+              })
+
     })
   }
 
@@ -181,11 +192,11 @@ export default class App extends Component {
         }).then((response) => response.json())
           .then((responseJson) => {
 
-            console.log(responseJson)
+            //console.log(responseJson)
 
             if(responseJson[0]==='created'){
               this.setState({ternary: false})
-            }else if(responseJson[0]!=='created'){
+            }else if(responseJson!=='created'){
               this.setState({
                 name: responseJson[0]['name'],
                 total_mileage: responseJson[0]['total_mileage'],
@@ -194,97 +205,105 @@ export default class App extends Component {
                 brake_pads: responseJson[1]['brake_pads']
               })
             }
+
+            //console.log(this.state)
+            // if(this.state.name===""){
+            //   this.setState({ternary: false})
+            // }
     })
-    console.log(this.state)
 
     let fetching
 
     let parentRender = () => {
-        renderTime()
-        responser()
+      renderTime()
+      responser()
     }
 
     let parentRenderTwo = () => {
-        renderTimeTwo()
-        responserTwo()
+      renderTimeTwo()
+      responserTwo()
     }
 
     let renderTime = () => {
       let inceptionArray = this.state.holder.slice(1, this.state.holder.length);
       fetching = `${fetchThis}` + inceptionArray + `&interpolate=true&key=AIzaSyBQSSqtL6ZXfausABmganfrNw6M6vZlXb0`
-      this.setState({waiter: fetching})
+      this.setState({ waiter: fetching })
     }
 
     let renderTimeTwo = () => {
       let inceptionArray = this.state.holder.slice(1, this.state.holder.length);
-      fetching = `${fetchThis}` + inceptionArray + `&interpolate=true&key=AIzaSyBQSSqtL6ZXfausABmganfrNw6M6vZlXb0`
-      this.setState({waiter: fetching})
+      fetching = `${ fetchThis }` + inceptionArray + `&interpolate=true&key=AIzaSyBQSSqtL6ZXfausABmganfrNw6M6vZlXb0`
+      this.setState({ waiter: fetching })
     }
 
-    let responser = () => {
-      return fetch(`${fetching}`).then((response) => response.json()).then((responseJson) => {
-        this.setState({responser: responseJson})
+    // called for Stop
+    let responser = async () => {
+      return await fetch(`${ fetching }`)
+      .then( async response => await response.json() )
+      .then( responseJson => {
+        console.log(responseJson)
+        this.setState({ responser: responseJson })
         let lat1 = this.state.responser.snappedPoints[0].location.latitude
-        let lon1 = -122.233 // this.state.responser.snappedPoints[0].location.longitude
+        let lon1 = this.state.responser.snappedPoints[0].location.longitude // -122.233
         let lat2 = this.state.responser.snappedPoints[this.state.responser.snappedPoints.length - 1].location.latitude
         let lon2 = this.state.responser.snappedPoints[this.state.responser.snappedPoints.length - 1].location.longitude
         getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2)
-      }).catch((error) => {
+      } )
+      .catch((error) => {
         console.error(error)
       })
     }
 
-    let responserTwo = () => {
-      return fetch(`${fetching}`).then((response) => response.json()).then((responseJson) => {
-        this.setState({responser: responseJson})
-        let lat1 = 0 //this.state.responser.snappedPoints[0].location.latitude
-        let lon1 = 0 // this.state.responser.snappedPoints[0].location.longitude
-        let lat2 = 0 //this.state.responser.snappedPoints[this.state.responser.snappedPoints.length - 1].location.latitude
-        let lon2 = 0 //this.state.responser.snappedPoints[this.state.responser.snappedPoints.length - 1].location.longitude
+    // called for addMiles
+    let responserTwo = async () => {
+      return await fetch(`${ fetching }`).then(async(response) => await response.json()).then(responseJson => {
+        this.setState({ responser: responseJson })
+        let lat1 = 0
+        let lon1 = 0
+        let lat2 = 0
+        let lon2 = 0
         getDistanceFromLatLonInKmTwo(lat1, lon1, lat2, lon2)
-      }).catch((error) => {
+      }).catch(error => {
         console.error(error)
       })
     }
 
-    // more hared coding on line 231
-    let theMagicHappen = () => {
-      // console.log(typeof Math.round(this.state.distanceAppender))
-      fetch('https://my-bike.herokuapp.com/components', {
+    let theMagicHappen = async () => {
+      await fetch('https://my-bike.herokuapp.com/components', {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
         method: 'PATCH',
-        body: JSON.stringify( {email: this.state.user, mileage: Math.round(this.state.distanceAppender)})
-        }).then((response) => response.json())
-          .then((responseJson) => {
-            this.state({
+        body: JSON.stringify( { email: this.state.user, mileage: Math.round(this.state.distanceAppender) })
+      }).then(async(response) => await response.json())
+          .then( responseJson => {
+            this.setState({
               appResponse: responseJson
-            })
+            } )
          console.log(responseJson)
         })
+        .catch( err => console.log(err) )
     }
 
-    let addMiles = () => {
-    fetch('https://my-bike.herokuapp.com/components', {
+    let addMiles = async () => {
+      await fetch('https://my-bike.herokuapp.com/components', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       method: 'PATCH',
-      body: JSON.stringify( {email: this.state.user, mileage: Math.round(this.state.addMilesState)})
-      }).then((response) => response.json())
-        .then((responseJson) => {
-          this.state({
+      body: JSON.stringify( { email: this.state.user, mileage: Math.round(this.state.addMilesState) })
+    }).then(async(response) => await response.json())
+        .then( responseJson => {
+          this.setState({
             addMiles: responseJson
           })
         console.log(responseJson)
-        })
+        } )
       }
 
       // Haversine Formula
-      // console.log("before distance", this.state.distanceAppender)
       let getDistanceFromLatLonInKm = (lat1, lon1, lat2, lon2) => {
         var R = 6371; // Radius of the earth in km
         var dLat = deg2rad(lat2 - lat1) // deg2rad below
@@ -293,52 +312,64 @@ export default class App extends Component {
         var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
         var d = R * c // Distance in km
         var mileCount = ( d * 0.621371) // conversion to Miles
-
+        console.log(mileCount)
         this.setState({ distanceAppender: mileCount })
         theMagicHappen()
-        // console.log(this.state.distanceAppender)
-        // console.log("TARGET", this.state.distanceAppender);
       }
 
       let getDistanceFromLatLonInKmTwo = (lat1, lon1, lat2, lon2) => {
         var R = 6371; // Radius of the earth in km
-        var dLat = deg2rad(lat2 - lat1); // deg2rad below
-        var dLon = deg2rad(lon2 - lon1);
-        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
-        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var dLat = deg2rad(lat2 - lat1) // deg2rad below
+        var dLon = deg2rad(lon2 - lon1)
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2)
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
         var d = R * c; // Distance in km
         var mileCount = ( d * 0.621371) // conversion to Miles
 
         this.setState({ addMiles: mileCount })
         addMiles()
-        //console.log(this.state.distanceAppender)
-        // console.log("TARGET", this.state.distanceAppender);
       }
-
-      // console.log("after distance", this.state.distanceAppender)
-      // console.log(this.state.distanceAppender)
 
       let deg2rad = (deg) => deg * (Math.PI / 180)
 
       let stoppingWaterfall = () => {
         setTimeout(this.getLocation, 100)
         parentRender()
-        // theMagicHappen();
+        falsify()
       }
 
       let stoppingWaterfallTwo = () => {
         setTimeout(this.getLocation, 100)
         parentRenderTwo()
-        // theMagicHappen()
+        this.textInput.clear()
       }
 
       let timeInitiate = () => {
+        console.log('time initiate en fuego')
         setTimeout(this.getLocation, 100)
+        //falsify()
+        trueOrNot()
+        trueTwo()
       }
 
-      // console.log(this.state.addMilesState);
-      // setTimeout(this.getLocation)
-      // this.getLocation()
+      let trueOrNot = () => {
+        this.setState({
+          truthy: false
+        })
+      }
+
+      let falsify = () => {
+        this.setState({
+          truthStop: !this.state.truthStop,
+          truthy: !this.state.truthy
+        })
+      }
+
+      let trueTwo = () => {
+        this.setState({
+          truthStop: !this.state.truthStop
+        })
+      }
 
     console.disableYellowBox = true
 
@@ -347,22 +378,24 @@ export default class App extends Component {
         {this.state.ternary
           ?
             <UserInterface
-              name={this.state.name}
-              total_mileage={this.state.total_mileage}
-              tires={this.state.tires}
-              chain={this.state.chain}
-              brake_pads={this.state.brake_pads}
-              timeInitiate={this.timeInitiate}
-              stoppingWaterfall={this.stoppingWaterfall}
-              stoppingWaterfallTwo={this.stoppingWaterfallTwo}
-              updateChains={this.updateChains}
-              updateBrakes={this.updateBrakes}
-              updateTires={this.updateTires}
-              user={this.state.user}
+              name={ this.state.name }
+              total_mileage={ this.state.total_mileage }
+              tires={ this.state.tires }
+              chain={ this.state.chain }
+              brake_pads={ this.state.brake_pads }
+              timeInitiate={ timeInitiate }
+              stoppingWaterfall={ stoppingWaterfall }
+              stoppingWaterfallTwo={ stoppingWaterfallTwo }
+              updateChains={ this.updateChains }
+              updateBrakes={ this.updateBrakes }
+              updateTires={ this.updateTires }
+              user={ this.state.user }
               loginWithGoogle={ this.loginWithGoogle.bind(this) }
+              truthStop={ this.state.truthStop }
+              truthy={ this.state.truthy }
             />
           :
-          <Ternary newBike={this.newBike}/>
+          <Ternary newBike={ this.newBike }/>
         }
         </View>
 

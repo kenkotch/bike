@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image, Linking, StyleSheet, Platform, View } from 'react-native';
-
-import { Container, Button, Text } from 'native-base';
+import { Router, Scene, navBar } from 'react-native-router-flux';
+import { Container, Button, Text, Badge } from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafariView from 'react-native-safari-view';
 
@@ -9,12 +9,20 @@ import SafariView from 'react-native-safari-view';
 class Brakes extends React.Component{
   render() {
     return(
-      <View>
-        <Text>
+      <View style={ styles.row }>
+        <Text style={{ marginTop: 11 }}>
           Brakes: service in {this.props.brake_pads} miles
         </Text>
-        <Button block full dark onPress={this.props.updateBrakes}>
-          <Text >update brakes</Text>
+        <Button
+          transparent
+          onPress={this.props.updateBrakes}
+        >
+          <View style={ styles.rowRight }>
+            <Badge>
+              <Text style={{ fontFamily: 'FontAwesome'}}>&#xf021;</Text>
+            </Badge>
+            <Text style={ styles.resetWord }>Reset</Text>
+          </View>
         </Button>
       </View>
     )

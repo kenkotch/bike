@@ -6,11 +6,10 @@ import Brakes from './Brakes'
 import Chains from './Chains'
 styles = require('../assets/stylesheet/Styles')
 
-class Maintenance extends React.Component{
+class Maintenance extends Component{
   render(){
     return(
     <View style={ styles.background }>
-      {/*<Header />*/}
       <View>
         <Brakes updateBrakes={this.props.updateBrakes} brake_pads={this.props.brake_pads}/>
         <Chains updateChains={this.props.updateChains} chain={this.props.chain}/>

@@ -1,58 +1,79 @@
-import React, { Component } from 'react';
-import { Image, Linking, StyleSheet, Platform, View, AppRegistry, TextInput, Text as Texter,  Switch } from 'react-native';
-import { Container, Button, Text } from 'native-base';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import SafariView from 'react-native-safari-view';
+import React, { Component } from 'react'
+import { Image, Linking, StyleSheet, Platform, View, AppRegistry, TextInput, Text as Texter,  Switch } from 'react-native'
+import { Container, Button, Text } from 'native-base'
+import { Jiro } from 'react-native-textinput-effects'
+import Icon from 'react-native-vector-icons/FontAwesome'
+import SafariView from 'react-native-safari-view'
+
 import Header from './Header'
 import Maintenance from './Maintenance'
 import Login from './Login'
 styles = require('../assets/stylesheet/Styles')
 let fetchThis = 'https://roads.googleapis.com/v1/snapToRoads?path='
 // onChangeText={(text) => this.setState({addMilesState: text})}
-class UserInterface extends React.Component{
-  render() {
+class UserInterface extends Component{
+  componentDidMount(){
     console.log(this.props)
+  }
+  render() {
     return(
       <View>
-        {this.props.user
-          ?
-        <View style={ styles.background }>
-          <Header />
-          <Text>name { this.props.name }</Text>
-          <Text>mileage { this.props.total_mileage }</Text>
-          <Text>tires { this.props.tires }</Text>
-          <Text>chain { this.props.chain }</Text>
-          <Text>brakes { this.props.brake_pads }</Text>
+        { this.props.user
+          ? // Show user info if already logged in
+            <View style={ styles.background }>
+              <Header />
+              <Text style={ styles.bikeName }>{ this.props.name }</Text>
+              <Text style={ styles.maintData }>Total Distance: { this.props.total_mileage } Miles</Text>
 
-          <Button block full dark
-            onPress={this.props.timeInitiate}
-            style={styles.startButtonStyle}
-          >
-            <Text style={{fontFamily: 'Muli-Light'}}>S T A R T</Text>
-          </Button>
-          <Button block full dark
-            onPress={this.props.stoppingWaterfall}
-            style={styles.stopButtonStyle}
-          >
-            <Text style={{fontFamily: 'Muli-Light'}}>S T O P</Text>
-          </Button>
+                {/* show/hide START button */}
+                { !this.props.truthStop &&
+                    <Button
+                      success
+                      onPress={ this.props.timeInitiate }
+                      style={ styles.startStopButtonStyle }
+                    >
+                      <Text>S T A R T</Text>
+                    </Button>
+                }
 
-          <TextInput
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          />
-          <Button block full dark
-            onPress={this.props.stoppingWaterfallTwo}
-          >
-            <Text style={{fontFamily: 'Muli-Light'}}>ADD MILES</Text>
-          </Button>
+                {/* show/hide STOP button */}
+                { this.props.truthStop &&
+                    <Button
+                      danger
+                      onPress={ this.props.stoppingWaterfall }
+                      style={ styles.startStopButtonStyle }
+                    >
+                      <Text>S T O P</Text>
+                    </Button>
+                }
+
+                {/*need text function! onChangeText={ text => this.setState({ addMilesState: text }) } */}
+                {/* Add Miles Manually */}
+                <Jiro
+                  label={ 'Add Miles Here' }
+                  borderColor={ 'gray' }
+                  ref={ input => { this.textInput = input } }
+
+                  style={ styles.milesInput }
+                />
+
+                <Button
+                  style={ styles.milesButton }
+                  dark
+                  onPress={ this.props.stoppingWaterfallTwo }
+                >
+                  <Text>ADD</Text>
+                </Button>
+
           <Maintenance
-            updateBrakes={this.props.updateBrakes}
-            brake_pads={this.props.brake_pads}
-            updateChains={this.props.updateChains}
-            chain={this.props.chain}
-            updateTires={this.props.updateTires}
-            tires={this.props.tires}
+            updateBrakes={ this.props.updateBrakes }
+            brake_pads={ this.props.brake_pads }
+            updateChains={ this.props.updateChains }
+            chain={ this.props.chain }
+            updateTires={ this.props.updateTires }
+            tires={ this.props.tires }
           />
+
       </View>
       :
       <View>
