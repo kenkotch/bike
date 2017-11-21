@@ -12,10 +12,13 @@ styles = require('../assets/stylesheet/Styles')
 let fetchThis = 'https://roads.googleapis.com/v1/snapToRoads?path='
 // onChangeText={(text) => this.setState({addMilesState: text})}
 class UserInterface extends Component{
-  componentDidMount() {
-    console.log(this.props)
+  constructor(props){
+    super(props)
+    this.state={addMilesState: ''}
   }
-
+  componentDidUpdate(){
+    console.log('fuck you')
+  }
   render() {
     return(
       <View>
@@ -55,7 +58,7 @@ class UserInterface extends Component{
                   label={ 'Add Miles Here' }
                   borderColor={ 'gray' }
                   ref={ input => { this.textInput = input } }
-
+                  onChangeText={ text => this.setState({ addMilesState: text }) }
                   style={ styles.milesInput }
                 />
 
