@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image, Linking, StyleSheet, Platform, View, AppRegistry, TextInput, Switch } from 'react-native';
 import { Router, Scene, navBar } from 'react-native-router-flux';
-import { Container, Button, Text, Content } from 'native-base';
+import { Container, Button, Text, Content, Badge } from 'native-base';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { Jiro } from 'react-native-textinput-effects';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -363,15 +363,19 @@ export default class App extends Component {
 
                 {/* Add Miles Manually */}
                 <Jiro
-                  label={'Add Miles Here'}
-                  borderColor={'white'}
-                  ref={input => { this.textInput = input }}
-                  onChangeText={text => this.setState({ addMilesState: text })}
-                  />
-                <Button block full dark
+                  label={ 'Add Miles Here' }
+                  borderColor={ 'white' }
+                  ref={ input => { this.textInput = input } }
+                  onChangeText={ text => this.setState({ addMilesState: text }) }
+                  style={ styles.milesInput }
+                />
+
+                <Button
+                  style={ styles.milesButton }
+                  dark
                   onPress={stoppingWaterfallTwo}
-                  >
-                  <Text style={{fontFamily: 'Muli-Light'}}>ADD MILES</Text>
+                >
+                  <Text>ADD</Text>
                 </Button>
 
               <Maintenance
@@ -382,7 +386,6 @@ export default class App extends Component {
                 updateTires={this.updateTires}
                 tires={this.state.tires}
               />
-
 
             </View>
           : // Show log in message if not

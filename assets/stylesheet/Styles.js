@@ -73,6 +73,29 @@ module.exports = StyleSheet.create({
     width: '55%',
     marginLeft: '25%',
     marginTop: 7
+  },
+  milesButton: {
+    width: '50%',
+    marginLeft: '25%',
+    justifyContent: 'center',
+    backgroundColor: 'black',
+    marginBottom: 20
+  },
+  milesInput: {
+    width: '80%',
+    marginLeft: '10%'
+  },
+  row: {
+    flexDirection: 'row',
+    marginLeft: '8%'
+  },
+  rowRight: {
+    flexDirection: 'row',
+    marginLeft: '11%'
+  },
+  resetWord: {
+    marginTop: 3,
+    color: 'black'
   }
 
 });
