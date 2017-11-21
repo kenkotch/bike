@@ -192,7 +192,7 @@ export default class App extends Component {
         }).then((response) => response.json())
           .then((responseJson) => {
 
-            console.log(responseJson)
+            //console.log(responseJson)
 
             if(responseJson[0]==='created'){
               this.setState({ternary: false})
@@ -206,7 +206,7 @@ export default class App extends Component {
               })
             }
 
-            console.log(this.state)
+            //console.log(this.state)
             // if(this.state.name===""){
             //   this.setState({ternary: false})
             // }
@@ -345,7 +345,9 @@ export default class App extends Component {
       }
 
       let timeInitiate = () => {
+        console.log('time initiate en fuego')
         setTimeout(this.getLocation, 100)
+        //falsify()
         trueOrNot()
         trueTwo()
       }
@@ -358,14 +360,14 @@ export default class App extends Component {
 
       let falsify = () => {
         this.setState({
-          truthStop: false,
-          truthy: true
+          truthStop: !this.state.truthStop,
+          truthy: !this.state.truthy
         })
       }
 
       let trueTwo = () => {
         this.setState({
-          truthStop: true
+          truthStop: !this.state.truthStop
         })
       }
 
@@ -376,22 +378,24 @@ export default class App extends Component {
         {this.state.ternary
           ?
             <UserInterface
-              name={this.state.name}
-              total_mileage={this.state.total_mileage}
-              tires={this.state.tires}
-              chain={this.state.chain}
-              brake_pads={this.state.brake_pads}
-              timeInitiate={this.timeInitiate}
-              stoppingWaterfall={this.stoppingWaterfall}
-              stoppingWaterfallTwo={this.stoppingWaterfallTwo}
-              updateChains={this.updateChains}
-              updateBrakes={this.updateBrakes}
-              updateTires={this.updateTires}
-              user={this.state.user}
+              name={ this.state.name }
+              total_mileage={ this.state.total_mileage }
+              tires={ this.state.tires }
+              chain={ this.state.chain }
+              brake_pads={ this.state.brake_pads }
+              timeInitiate={ timeInitiate }
+              stoppingWaterfall={ stoppingWaterfall }
+              stoppingWaterfallTwo={ stoppingWaterfallTwo }
+              updateChains={ this.updateChains }
+              updateBrakes={ this.updateBrakes }
+              updateTires={ this.updateTires }
+              user={ this.state.user }
               loginWithGoogle={ this.loginWithGoogle.bind(this) }
+              truthStop={ this.state.truthStop }
+              truthy={ this.state.truthy }
             />
           :
-          <Ternary newBike={this.newBike}/>
+          <Ternary newBike={ this.newBike }/>
         }
         </View>
 
