@@ -31,18 +31,20 @@ module.exports = StyleSheet.create({
   background: {
     backgroundColor: '#e2ca29',
     width: '100%',
-    height: '100%',
+    height: '100%'
   },
   center: {
     alignItems: 'center'
   },
   subHeader: {
+    textAlign: 'center',
     alignItems: 'center',
     fontFamily: 'Muli',
     fontSize: 35
   },
   maintData: {
     alignItems: 'center',
+    textAlign: 'center',
     fontFamily: 'Muli',
     fontSize: 20
   },
@@ -55,6 +57,21 @@ module.exports = StyleSheet.create({
     alignItems: 'center',
     fontFamily: 'Muli-Light',
     fontSize: 35
+  },
+  bikeName: {
+    textAlign: 'center',
+    fontFamily: 'Muli',
+    fontSize: 35,
+    marginTop: -5
+  },
+  startStopButtonStyle: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    fontFamily: 'Muli',
+    fontSize: 18,
+    width: '55%',
+    marginLeft: '25%'
   }
 
 });

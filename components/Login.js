@@ -8,16 +8,16 @@ const Login = ({
   loginWithGoogle
 }) => {
   return(
-    <View style={styles.background}>
+    <View style={ styles.background }>
       <Header />
       <View>
         <Button block full dark
-          style={styles.login}
+          style={ styles.login }
           name="google"
-          onPress={loginWithGoogle}
+          onPress={ loginWithGoogle }
         >
-          <Text style={{fontFamily: 'FontAwesome'}}>&#xf1a0;</Text>
-          <Text style={{fontFamily: 'Muli-Light'}}>Google Login</Text>
+          <Text style={{ fontFamily: 'FontAwesome' }}>&#xf1a0;</Text>
+          <Text style={{ fontFamily: 'Muli-Light' }}>Google Login</Text>
         </Button>
       </View>
     </View>

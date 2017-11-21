@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image, Linking, StyleSheet, Platform, View, AppRegistry, TextInput, Switch } from 'react-native';
 import { Router, Scene, navBar } from 'react-native-router-flux';
-import { Container, Button, Text } from 'native-base';
+import { Container, Button, Text, Content } from 'native-base';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { Jiro } from 'react-native-textinput-effects';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -336,26 +336,29 @@ export default class App extends Component {
           ? // Show user info if already logged in
             <View style={ styles.background }>
               <Header />
-              <Text>name { this.state.name }</Text>
-              <Text>mileage { this.state.total_mileage }</Text>
-              <Text>tires { this.state.tires }</Text>
-              <Text>chain { this.state.chain }</Text>
-              <Text>brakes { this.state.brake_pads }</Text>
+              <Text style={ styles.bikeName }>{ this.state.name }</Text>
+              <Text style={ styles.maintData }>Total Distance: { this.state.total_mileage } Miles</Text>
 
-              <Button block full dark
-                onPress={timeInitiate}
-                style={styles.startButtonStyle}
-                disabled={this.state.truthStop}
-              >
-                <Text style={{fontFamily: 'Muli-Light'}}>S T A R T</Text>
-              </Button>
-              <Button block full dark
-                onPress={stoppingWaterfall}
-                style={styles.stopButtonStyle}
-                disabled={this.state.truthy}
-              >
-                <Text style={{fontFamily: 'Muli-Light'}}>S T O P</Text>
-              </Button>
+                    {/* show/hide START button */}
+                    { !this.state.truthStop &&
+                        <Button
+                          dark
+                          onPress={ timeInitiate }
+                          style={ styles.startStopButtonStyle }
+                        >
+                          <Text>S T A R T</Text>
+                        </Button>
+                    }
+
+                    {/* show/hide STOP button */}
+                    { this.state.truthStop &&
+                        <Button dark
+                          onPress={ stoppingWaterfall }
+                          style={ styles.startStopButtonStyle }
+                        >
+                          <Text style={{ fontFamily: 'Muli-Light' }}> S T O P </Text>
+                        </Button>
+                    }
 
               <Jiro
                 label={'Add Miles Here'}
