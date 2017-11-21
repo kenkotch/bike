@@ -23,6 +23,7 @@ class UserInterface extends Component{
 
   cascade = () => {
     this.props.updateMiles(this.state.addMilesState)
+    
   }
 
   render() {
@@ -58,6 +59,7 @@ class UserInterface extends Component{
                 }
 
                 {/* Add Miles Manually */}
+                {this.props.flicker&&
                 <Jiro
                   keyboardType={ 'numeric' }
                   label={ 'Add Miles Here' }
@@ -66,6 +68,7 @@ class UserInterface extends Component{
                   onChangeText={ text => this.setState({ addMilesState: text }) }
                   style={ styles.milesInput }
                 />
+            }
 
                 <Button
                   style={ styles.milesButton }

@@ -39,6 +39,7 @@ export default class App extends Component {
       truthy: true,
       truthStop: false,
       ternary: true,
+      flicker: true,
       fetchThis: 'https://roads.googleapis.com/v1/snapToRoads?path='
      }
      this.getLocation = this.getLocation.bind(this)
@@ -277,6 +278,7 @@ export default class App extends Component {
     }
 
     let addMiles = async () => {
+      this.setState({ flicker: true })
       await fetch('https://my-bike.herokuapp.com/components', {
       headers: {
         'Accept': 'application/json',
@@ -293,7 +295,7 @@ export default class App extends Component {
         } )
       }
       var updateMiles = async (text) => {
-        await this.setState({addMilesState: text})
+        await this.setState({addMilesState: text, flicker: false})
         await console.log(this.state.addMilesState)
         await addMiles()
         await this.textInput.clear()
@@ -388,6 +390,7 @@ export default class App extends Component {
               truthStop={ this.state.truthStop }
               truthy={ this.state.truthy }
               updateMiles={updateMiles}
+              flicker={this.state.flicker}
             />
         </View>
           :
