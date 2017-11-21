@@ -100,6 +100,12 @@ module.exports = StyleSheet.create({
   rowText: {
     width: '60%',
     marginTop: 11
+  },
+  newInput: {
+    marginLeft: 15,
+    fontFamily: 'Muli',
+    fontSize: 18,
+    height: 40
   }
 
 });
