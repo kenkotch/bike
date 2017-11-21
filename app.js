@@ -21,7 +21,7 @@ let fetchThis = 'https://roads.googleapis.com/v1/snapToRoads?path='
 export default class App extends Component {
   constructor(props) {
     super(props)
-    this.state={
+    this.state= {
       user: null,
       name: '',
       total_mileage: '',
@@ -112,7 +112,7 @@ export default class App extends Component {
        'Content-Type': 'application/json'
       },
       method: 'PATCH',
-      body: JSON.stringify( {email: this.state.user})
+      body: JSON.stringify( { email: this.state.user })
         }).then(response => response.json())
           .then(responseJson => {
       console.log(responseJson)
@@ -148,24 +148,11 @@ export default class App extends Component {
     }).then( response => response.json() )
       .then( responseJson => {
     console.log(responseJson)
-    this.setState({brake_pads: responseJson} )
+    this.setState({ brake_pads: responseJson })
       })
   }
 
-
-
-
-  // updateMiles=(text)=>{
-  //   this.setState({addMilesState: text})
-  //   addMiles()
-  // }
-
-
-
-
-
-
-  newBike=(name, mileage, sinceRepair )=>{
+  newBike=(name, mileage, sinceRepair) => {
     console.log('name:', name)
     console.log('mileage:', mileage)
     fetch('https://my-bike.herokuapp.com/bikes/add', {
@@ -198,15 +185,13 @@ export default class App extends Component {
         'Content-Type': 'application/json'
       },
       method: 'POST',
-      body: JSON.stringify( {email: this.state.user})
+      body: JSON.stringify( { email: this.state.user })
         }).then((response) => response.json())
           .then((responseJson) => {
 
-            //console.log(responseJson)
-
-            if(responseJson[0]==='created'){
+            if(responseJson[0]==='created') {
               this.setState({ternary: false})
-            }else if(responseJson!=='created'){
+            } else if(responseJson!=='created') {
               this.setState({
                 name: responseJson[0]['name'],
                 total_mileage: responseJson[0]['total_mileage'],
@@ -215,11 +200,6 @@ export default class App extends Component {
                 brake_pads: responseJson[1]['brake_pads']
               })
             }
-
-            //console.log(this.state)
-            // if(this.state.name===""){
-            //   this.setState({ternary: false})
-            // }
     })
 
     let fetching
@@ -236,7 +216,7 @@ export default class App extends Component {
 
     let renderTime = () => {
       let inceptionArray = this.state.holder.slice(1, this.state.holder.length)
-      fetching = `${fetchThis}` + inceptionArray + `&interpolate=true&key=AIzaSyBQSSqtL6ZXfausABmganfrNw6M6vZlXb0`
+      fetching = `${ fetchThis }` + inceptionArray + `&interpolate=true&key=AIzaSyBQSSqtL6ZXfausABmganfrNw6M6vZlXb0`
       this.setState({ waiter: fetching })
     }
 
@@ -360,9 +340,7 @@ export default class App extends Component {
       }
 
       let timeInitiate = () => {
-        console.log('time initiate en fuego')
         setTimeout(this.getLocation, 100)
-        //falsify()
         trueOrNot()
         trueTwo()
       }
@@ -416,8 +394,6 @@ export default class App extends Component {
           <Ternary newBike={ this.newBike }/>
         }
         </View>
-
-
     )
   }
 }
