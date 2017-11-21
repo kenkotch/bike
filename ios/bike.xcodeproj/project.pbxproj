@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -46,6 +45,8 @@
 		41F793F3E17F49968E607E1C /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00F2AD520B3C4927B75438FF /* Zocial.ttf */; };
 		43A3F1F998F24C5792295357 /* fontawesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00A592EF949E475BB6A0B076 /* fontawesome.ttf */; };
 		46F5E314837040B187D2A981 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50E222D6ED7D46E182943551 /* EvilIcons.ttf */; };
+		48AE5F961FC4A57600F4C5FE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB61A68108700A75B9A /* Info.plist */; };
+		48AE5FBE1FC4A57600F4C5FE /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB61A68108700A75B9A /* Info.plist */; };
 		4C011DFC6B064984BE654893 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B7A9E7634A04BB0B8D141D2 /* MaterialCommunityIcons.ttf */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		5EA63B7FCA224B259460B951 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 662652C9B2A149B0BFCB147C /* Octicons.ttf */; };
@@ -833,6 +834,11 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 24VH3NZJ24;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1210,6 +1216,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48AE5FBE1FC4A57600F4C5FE /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1247,6 +1254,7 @@
 				709DB2D2A4A847A99A02FC51 /* Zocial.ttf in Resources */,
 				70319D478A4644CA8A34696F /* Muli-Bold.ttf in Resources */,
 				60C82CD538634A6FA4B57E3A /* Muli-SemiBold.ttf in Resources */,
+				48AE5F961FC4A57600F4C5FE /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

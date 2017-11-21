@@ -31,7 +31,7 @@ export default class App extends Component {
       locations: [],
       holder: [],
       waiter: [],
-      responser: [],
+      responser: [0],
       distanceAppender: '',
       appResponse: [],
       addMiles: '',
