@@ -76,7 +76,7 @@ module.exports = StyleSheet.create({
   },
   milesButton: {
     width: '50%',
-    marginLeft: '25%',
+    marginLeft: '27%',
     justifyContent: 'center',
     backgroundColor: 'black',
     marginBottom: 20
