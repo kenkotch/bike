@@ -23,7 +23,6 @@ class UserInterface extends Component{
 
   cascade = () => {
     this.props.updateMiles(this.state.addMilesState)
-    
   }
 
   render() {
@@ -59,16 +58,16 @@ class UserInterface extends Component{
                 }
 
                 {/* Add Miles Manually */}
-                {this.props.flicker&&
-                <Jiro
-                  keyboardType={ 'numeric' }
-                  label={ 'Add Miles Here' }
-                  borderColor={ 'gray' }
-                  ref={ input => { this.textInput = input } }
-                  onChangeText={ text => this.setState({ addMilesState: text }) }
-                  style={ styles.milesInput }
-                />
-            }
+                { this.props.flicker&&
+                  <Jiro
+                    keyboardType={ 'numeric' }
+                    label={ 'Add Miles Here' }
+                    borderColor={ 'gray' }
+                    ref={ input => { this.textInput = input } }
+                    onChangeText={ text => this.setState({ addMilesState: text }) }
+                    style={ styles.milesInput }
+                  />
+                }
 
                 <Button
                   style={ styles.milesButton }

@@ -46,7 +46,8 @@ module.exports = StyleSheet.create({
     alignItems: 'center',
     textAlign: 'center',
     fontFamily: 'Muli',
-    fontSize: 20
+    fontSize: 20,
+    marginTop: 7
   },
   hozRule: {
     borderBottomColor: 'black',
@@ -62,7 +63,7 @@ module.exports = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'Muli',
     fontSize: 35,
-    marginTop: -5
+    marginTop: 10
   },
   startStopButtonStyle: {
     justifyContent: 'center',
@@ -72,11 +73,12 @@ module.exports = StyleSheet.create({
     fontSize: 18,
     width: '55%',
     marginLeft: '25%',
-    marginTop: 7
+    marginTop: 12
   },
   milesButton: {
     width: '50%',
-    marginLeft: '27%',
+    marginLeft: '25%',
+    marginTop: 15,
     justifyContent: 'center',
     backgroundColor: 'black',
     marginBottom: 40
