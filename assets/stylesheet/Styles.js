@@ -63,7 +63,7 @@ module.exports = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'Muli',
     fontSize: 35,
-    marginTop: 10
+    marginTop: 12
   },
   startStopButtonStyle: {
     justifyContent: 'center',
