@@ -108,6 +108,9 @@ module.exports = StyleSheet.create({
     fontFamily: 'Muli',
     fontSize: 18,
     height: 40
+  },
+  hozRuleRed: {
+    borderBottomColor: 'red'
   }
 
 });
